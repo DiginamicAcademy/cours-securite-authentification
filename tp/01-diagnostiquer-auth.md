@@ -7,7 +7,7 @@
 
 ## Contexte
 
-La fromagerie *DIGICHEESE* (artisanale, installée dans le Jura) ouvre un extranet
+**DIGICHEESE** (la fromagerie du fil rouge) ouvre un extranet
 à ses revendeurs (épiceries, restaurants) et une console d'administration à son
 équipe. L'agence qui a livré
 l'application vous fait une démonstration. Voici ce que vous observez :

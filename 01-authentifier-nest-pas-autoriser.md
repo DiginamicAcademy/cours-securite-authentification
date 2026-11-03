@@ -1,8 +1,6 @@
-[← Chapitre précédent](01-Exemple%20de%20cours%20en%20un%20seul%20fichier.md) · [Sommaire](Readme.md) · [Chapitre suivant →](02-Exemple%20de%20cours%20en%20multi-fichier.md)
-
 # Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité
 
-> Un client de **DIGICHEESE** (fromagerie artisanale du Jura) se connecte à son compte
+> Un client de **DIGICHEESE** (la fromagerie du fil rouge) se connecte à son compte
 > et découvre la liste de toutes les commandes de la boutique. Il était bien authentifié — mais
 > avait-il le droit de voir ça ? Deux questions différentes, deux portes
 > différentes : les confondre est la faille la plus fréquente du web.
@@ -139,7 +137,3 @@ la journée.*
   **a**, ce qu'on **est** — chacune se combine, aucune ne suffit.
 - « Connecté » ne veut pas dire « autorisé » : confondre les deux est la faille la
   plus fréquente.
-
----
-
-[← Chapitre précédent](01-Exemple%20de%20cours%20en%20un%20seul%20fichier.md) · [Sommaire](Readme.md) · [Chapitre suivant →](02-Exemple%20de%20cours%20en%20multi-fichier.md)
