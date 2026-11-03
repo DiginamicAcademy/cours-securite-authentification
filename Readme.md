@@ -32,8 +32,23 @@ Vous serez capable de :
 
 ## Sommaire
 
-1. [Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité](01-authentifier-nest-pas-autoriser.md) — chapitre, 45 min
-2. [Exercice — Diagnostiquer l'authentification d'une application](tp/01-diagnostiquer-auth.md) — 25 min, avec son [corrigé](tp/corrige/01-diagnostiquer-auth.md)
+| # | Chapitre | Durée de lecture |
+| --- | --- | --- |
+| 01 | [Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité](01-authentifier-nest-pas-autoriser.md) | 45 min |
+| 02 | [Mots de passe — hacher, saler, policer](02-mots-de-passe.md) | 65 min |
+| 03 | [Sessions — le badge de connexion](03-sessions.md) | 60 min |
+| 04 | [JWT et tokens — la lettre signée](04-jwt-et-tokens.md) | 65 min |
+| 05 | [OAuth2 et OpenID Connect — donner un accès limité](05-oauth2-oidc.md) | 70 min |
+| 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 50 min |
+
+**Travaux pratiques**
+
+| | Sujet | Durée |
+| --- | --- | --- |
+| 🟢 | [Exercice — Diagnostiquer l'authentification d'une application](tp/01-diagnostiquer-auth.md) · [corrigé](tp/corrige/01-diagnostiquer-auth.md) | 25 min |
+| 🟡 | [Exercice — Sécuriser la session d'une application](tp/02-securiser-session.md) · [corrigé](tp/corrige/02-securiser-session.md) | 45 min |
+| 🔵 | [Exercice — Concevoir l'authentification d'une API de données](tp/03-concevoir-auth-api.md) · [corrigé](tp/corrige/03-concevoir-auth-api.md) | 55 min |
+| 🔴 | [Exercice — Proposer une politique MFA accessible et conforme](tp/04-defi-mfa.md) · [corrigé](tp/corrige/04-defi-mfa.md) | — |
 
 ---
 
