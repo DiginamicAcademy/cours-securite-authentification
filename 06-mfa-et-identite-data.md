@@ -1,3 +1,5 @@
+[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)
+
 # MFA et identité data — humains et machines
 
 > Une administratrice de plateforme de données se connecte à l'entrepôt avec un
@@ -185,3 +187,7 @@ la journée.*
   difficulté se déplace vers la **récupération de compte**.
 - Un compte de service n'a pas de MFA : sa protection tient au **moindre
   privilège**, aux secrets hors du code, à la **rotation** et à la **journalisation**.
+
+---
+
+[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)

@@ -1,3 +1,5 @@
+[← Chapitre précédent](01-authentifier-nest-pas-autoriser.md) · [Sommaire](Readme.md) · [Chapitre suivant →](03-sessions.md)
+
 # Mots de passe — hacher, saler, policer
 
 > En 2012, LinkedIn perd **117 millions** de mots de passe, stockés en SHA-1
@@ -214,3 +216,7 @@ la journée.*
   augmenter avec le matériel disponible.
 - La politique suit le NIST 800-63B : **longueur** plutôt que complexité, pas de
   rotation forcée, mots de passe fuités refusés, tentatives limitées.
+
+---
+
+[← Chapitre précédent](01-authentifier-nest-pas-autoriser.md) · [Sommaire](Readme.md) · [Chapitre suivant →](03-sessions.md)

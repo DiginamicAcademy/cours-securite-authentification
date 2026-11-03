@@ -1,3 +1,5 @@
+[← Chapitre précédent](02-mots-de-passe.md) · [Sommaire](Readme.md) · [Chapitre suivant →](04-jwt-et-tokens.md)
+
 # Sessions — le badge de connexion
 
 > Vous consultez votre compte bancaire en ligne. Entre la connexion et la
@@ -174,3 +176,7 @@ la journée.*
   depuis un autre site — aucun drapeau ne remplace HTTPS.
 - Une session se termine **des deux côtés** : expiration côté serveur **et**
   invalidation à la déconnexion.
+
+---
+
+[← Chapitre précédent](02-mots-de-passe.md) · [Sommaire](Readme.md) · [Chapitre suivant →](04-jwt-et-tokens.md)

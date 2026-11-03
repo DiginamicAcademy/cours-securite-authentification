@@ -1,3 +1,5 @@
+[← Chapitre précédent](03-sessions.md) · [Sommaire](Readme.md) · [Chapitre suivant →](05-oauth2-oidc.md)
+
 # JWT et tokens — la lettre signée
 
 > Un serveur qui vous a identifié vous remet parfois une **lettre signée** :
@@ -179,3 +181,7 @@ la journée.*
   jeton dans `localStorage`, durée de vie excessive.
 - La vérification côté serveur est une **liste** : signature, algorithme,
   expiration, émetteur, destinataire, périmètre, révocation.
+
+---
+
+[← Chapitre précédent](03-sessions.md) · [Sommaire](Readme.md) · [Chapitre suivant →](05-oauth2-oidc.md)

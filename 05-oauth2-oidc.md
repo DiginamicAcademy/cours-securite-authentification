@@ -1,3 +1,5 @@
+[← Chapitre précédent](04-jwt-et-tokens.md) · [Sommaire](Readme.md) · [Chapitre suivant →](06-mfa-et-identite-data.md)
+
 # OAuth2 et OpenID Connect — donner un accès limité
 
 > Avant OAuth, une application qui voulait accéder à vos photos vous demandait
@@ -166,3 +168,7 @@ la journée.*
   jeton volé reste limité à ce qui a été consenti.
 - OpenID Connect ajoute l'**identité** (ID token) à l'autorisation ; une clé
   d'API, elle, identifie un programme — jamais une personne.
+
+---
+
+[← Chapitre précédent](04-jwt-et-tokens.md) · [Sommaire](Readme.md) · [Chapitre suivant →](06-mfa-et-identite-data.md)

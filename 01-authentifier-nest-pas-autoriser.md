@@ -1,3 +1,5 @@
+[Sommaire](Readme.md) · [Chapitre suivant →](02-mots-de-passe.md)
+
 # Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité
 
 > Un client de **DIGICHEESE** (la fromagerie du fil rouge) se connecte à son compte
@@ -137,3 +139,7 @@ la journée.*
   **a**, ce qu'on **est** — chacune se combine, aucune ne suffit.
 - « Connecté » ne veut pas dire « autorisé » : confondre les deux est la faille la
   plus fréquente.
+
+---
+
+[Sommaire](Readme.md) · [Chapitre suivant →](02-mots-de-passe.md)
