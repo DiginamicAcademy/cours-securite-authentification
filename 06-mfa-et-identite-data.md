@@ -1,5 +1,7 @@
 [← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)
 
+<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « MFA pertinente ou excessive » (§I) · ✅ correction juste après l'atelier · 📘 §§ I à III · 🔵 les règles du compte de service (§III) sur un pipeline du fil rouge -->
+
 # MFA et identité data — humains et machines
 
 > Une administratrice de plateforme de données se connecte à l'entrepôt avec un
@@ -8,7 +10,7 @@
 > est le plus dangereux ? La réponse dérange : le pipeline, lui, ne se fait pas
 > hameçonner.
 
-**Durée de lecture :** 50 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
+**Durée :** ≈ 19 min — lecture ≈ 14 min + atelier 5 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
 
 ---
 
@@ -88,13 +90,15 @@ d'exception. C'est le sujet de l'exercice de fin de journée.
 
 ## II. Passkeys — la fin du mot de passe
 
+> ⚠️ **À ARBITRER** — section hors des objectifs déclarés du chapitre : soit rattacher un objectif sur les passkeys, soit la déplacer en « Aller plus loin », soit la retirer si le temps est compté. Contenu conservé en l'état.
+
 Une **passkey** remplace le couple identifiant / mot de passe par une paire de
 clés cryptographiques :
 
 - la clé privée reste sur l'appareil (téléphone, ordinateur, clé matérielle) et
   ne sort jamais ;
 - la clé publique est enregistrée par le service ;
-- la déverrouillage de l'appareil (empreinte, code) débloque la signature.
+- le déverrouillage de l'appareil (empreinte, code) débloque la signature.
 
 Conséquences heureuses : rien à mémoriser, rien à deviner, et surtout une
 propriété que les mots de passe n'ont pas — la passkey est **liée au site**. Un

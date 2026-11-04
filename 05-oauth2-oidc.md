@@ -1,5 +1,7 @@
 [← Chapitre précédent](04-jwt-et-tokens.md) · [Sommaire](Readme.md) · [Chapitre suivant →](06-mfa-et-identite-data.md)
 
+<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « suivre le déroulement pas à pas » (§II) · ✅ correction juste après l'atelier · 📘 §§ I à III · 🔵 le choix clé d'API ou jeton délégué (§II) -->
+
 # OAuth2 et OpenID Connect — donner un accès limité
 
 > Avant OAuth, une application qui voulait accéder à vos photos vous demandait
@@ -8,7 +10,7 @@
 > ne partage pas son secret, on accorde un **accès limité** dans le temps et dans
 > le périmètre. OpenID Connect ajoute par-dessus la réponse à « qui êtes-vous ? ».
 
-**Durée de lecture :** 70 min · **Prérequis :** [JWT et tokens](04-jwt-et-tokens.md)
+**Durée :** ≈ 17 min — lecture ≈ 12 min + atelier 5 min · **Prérequis :** [JWT et tokens](04-jwt-et-tokens.md)
 
 ---
 
@@ -76,6 +78,19 @@ L'idée centrale : le **code** d'autorisation transite par le navigateur, mais 
 **jeton** est échangé directement entre le client et le serveur d'autorisation,
 avec une preuve d'identité du client. Un code intercepté ne suffit pas.
 
+> 🧪 **Atelier rapide (5 min)**
+>
+> Reprenez le déroulement ci-dessus, étape par étape, et notez qui parle à qui —
+> navigateur, client, serveur d'autorisation, API :
+>
+> 1. à quelle étape le mot de passe de la responsable des ventes est-il utilisé ?
+> 2. un code d'autorisation intercepté par un tiers permet-il d'appeler l'API ?
+>    Justifiez en une phrase.
+> 3. que doit afficher l'écran de consentement pour que l'accord soit éclairé ?
+>
+> Comparez vos réponses à ce critère : *ce que chaque acteur apprend à chaque
+> étape, et ce qu'il pourrait en faire*.
+
 ### Les périmètres (scopes)
 
 Le jeton d'accès porte des **périmètres** — des mots qui décrivent ce qui est
@@ -127,6 +142,8 @@ réponse : c'est une couche **au-dessus** d'OAuth2, pas un concurrent.
 
 ### Le cas du tableau de bord
 
+> ⚠️ **À ARBITRER** — synthèse qui reprend le scénario d'ouverture du chapitre : raccourcie ou supprimée si la journée est courte. Contenu conservé en l'état.
+
 Pour notre plateforme de business intelligence, la séparation devient nette :
 
 - les **personnes** se connectent via OIDC avec l'identité de leur entreprise —
@@ -152,9 +169,8 @@ la journée.*
 - **La rotation des jetons de rafraîchissement** : chaque usage en délivre un
   nouveau et invalide l'ancien. Un jeton de rafraîchissement volé devient alors
   détectable — deux utilisations simultanées trahissent le vol.
-- **Les jetons dans les URL** : jamais. Un jeton transmis en paramètre d'adresse
-  se retrouve dans les journaux, l'historique et les en-têtes `Referer`. Le jeton
-  voyage dans un en-tête `Authorization`, sur HTTPS.
+- **Les jetons dans les URL** : jamais — la règle est détaillée au chapitre [JWT et tokens](04-jwt-et-tokens.md).
+  Le jeton voyage dans un en-tête `Authorization`, sur HTTPS.
 
 ---
 

@@ -1,5 +1,7 @@
 [← Chapitre précédent](02-mots-de-passe.md) · [Sommaire](Readme.md) · [Chapitre suivant →](04-jwt-et-tokens.md)
 
+<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « décoder le jeton » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 le test de déconnexion (§III, encadré « Astuce ») -->
+
 # Sessions — le badge de connexion
 
 > Vous consultez votre compte bancaire en ligne. Entre la connexion et la
@@ -8,7 +10,7 @@
 > partout, et s'il est volé, l'attaquant devient vous, sans jamais avoir connu
 > votre secret.
 
-**Durée de lecture :** 60 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
+**Durée :** ≈ 16 min — lecture ≈ 11 min + atelier 5 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
 
 ---
 
@@ -38,6 +40,8 @@ Deux modèles coexistent :
 | --- | --- | --- | --- |
 | Session côté serveur | le serveur garde un dictionnaire identifiant → données | révocation immédiate | état à partager entre les serveurs d'un cluster |
 | Jeton signé (sans état) | le jeton porte lui-même les informations | aucun état serveur, monte en charge | la révocation demande des mesures supplémentaires |
+
+> ⚠️ **À ARBITRER** — la ligne « Jeton signé (sans état) » ci-dessus annonce le chapitre [JWT et tokens](04-jwt-et-tokens.md), qui la développe : la retirer de ce tableau est envisageable. Contenu conservé en l'état.
 
 ### Un jeton que l'on porte
 

@@ -1,14 +1,17 @@
 [← Chapitre précédent](03-sessions.md) · [Sommaire](Readme.md) · [Chapitre suivant →](05-oauth2-oidc.md)
 
+<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « fabriquer et casser un jeton » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 la liste de contrôle « Contrôler un jeton reçu » (§III) -->
+
 # JWT et tokens — la lettre signée
 
 > Un serveur qui vous a identifié vous remet parfois une **lettre signée** :
 > chacun peut la lire, personne ne peut la modifier sans casser la signature.
-> C'est le principe d'un JWT (JSON Web Token) — et la source de ses
+> C'est le principe d'un JWT (JSON Web Token — JSON pour JavaScript Object
+> Notation) — et la source de ses
 > mésaventures : une signature non vérifiée, une clé faible ou un jeton sans
 > expiration, et la lettre devient un laissez-passer contrefait.
 
-**Durée de lecture :** 65 min · **Prérequis :** [Sessions — le badge de connexion](03-sessions.md)
+**Durée :** ≈ 20 min — lecture ≈ 12 min + atelier 8 min · **Prérequis :** [Sessions — le badge de connexion](03-sessions.md)
 
 ---
 
@@ -56,7 +59,7 @@ le jeton doit pouvoir consulter les déclarations sans appeler qui que ce soit.
 
 | Opération | Qui peut lire | Qui peut modifier | Usage |
 | --- | --- | --- | --- |
-| Signature — HMAC ou RSA (Rivest, Shamir et Adleman) | tout le monde | personne sans la clé | prouver l'origine et l'intégrité |
+| Signature — HMAC (Hash-based Message Authentication Code) ou RSA (Rivest, Shamir et Adleman) | tout le monde | personne sans la clé | prouver l'origine et l'intégrité |
 | Chiffrement | le seul destinataire | personne sans la clé | protéger la confidentialité |
 
 Un JWT signé répond à « ce jeton vient-il bien de mon serveur, et n'a-t-il pas
@@ -103,8 +106,8 @@ La commodité des JWT a popularisé quelques erreurs, toutes spectaculaires.
   jamais dans le jeton.
 - **Ne vérifier que le décodage** — décoder la charge utile sans vérifier la
   signature revient à accepter un document non signé.
-- **Clé faible ou clé par défaut** — une signature HMAC (Hash-based Message
-  Authentication Code) avec la clé `secret` se casse par devinette. La clé est un
+- **Clé faible ou clé par défaut** — une signature HMAC avec la clé `secret` se
+  casse par devinette. La clé est un
   secret au sens du chapitre [Mots de passe](02-mots-de-passe.md) : longue,
   tirée au sort, stockée dans un coffre.
 - **Durée de vie excessive, aucune révocation** — un jeton valable un an, volé
@@ -116,8 +119,9 @@ La commodité des JWT a popularisé quelques erreurs, toutes spectaculaires.
   `HttpOnly` le cache au
   JavaScript ; le choix se discute selon l'architecture (chapitre
   [Sessions](03-sessions.md)).
-- **Le jeton dans l'adresse** — passé en paramètre d'URL, il se retrouve dans les
-  journaux du serveur, l'historique du navigateur et les en-têtes `Referer`.
+- **Le jeton dans l'adresse** — passé en paramètre d'URL (Uniform Resource
+  Locator), il se retrouve dans les journaux du serveur, l'historique du
+  navigateur et les en-têtes `Referer`.
 
 > ⛔ **Piège de sécurité**
 > Un JWT n'est pas « sécurisé par nature ». Il est sécurisé **si et seulement si**
@@ -133,7 +137,7 @@ La vérification côté serveur tient en une liste courte, à appliquer dans l'o
 | Contrôle | Pourquoi | Si le contrôle manque |
 | --- | --- | --- |
 | Signature valide, algorithme en liste blanche | le jeton vient bien de l'émetteur | jeton fabriqué à la main |
-| `exp` (expiration) et `nb` (validité) | le jeton est encore dans sa période | jeton volé exploitable indéfiniment |
+| `exp` (expiration) et `nbf` (validité) | le jeton est encore dans sa période | jeton volé exploitable indéfiniment |
 | `iss` (émetteur) et `aud` (destinataire) | le jeton est bien pour moi | jeton d'un autre service accepté ici |
 | Périmètre ou rôle (`scope`) | l'identité a le droit demandé | confusion authentification / autorisation |
 | Révocation | le jeton n'a pas été invalidé | un jeton compromis reste bon |
@@ -146,6 +150,8 @@ Sur la révocation, deux écoles :
 - **Liste noire** : le serveur garde une liste de jetons invalidés, vérifiée à
   chaque requête. Cela réintroduit un état serveur — et donc une base à
   interroger vite.
+
+> ⚠️ **À ARBITRER** — détail d'implémentation (marge d'horloge sur `exp`) : utile en production, mais secondaire pour une journée d'initiation — suppression ou déplacement en « Aller plus loin » envisageables. Contenu conservé en l'état.
 
 Un détail d'implémentation qui coûte cher : tolérer une petite différence
 d'horloge entre serveurs (quelques secondes de marge sur `exp`), sans quoi des

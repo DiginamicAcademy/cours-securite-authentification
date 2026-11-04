@@ -1,5 +1,7 @@
 [← Chapitre précédent](01-authentifier-nest-pas-autoriser.md) · [Sommaire](Readme.md) · [Chapitre suivant →](03-sessions.md)
 
+<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « lister les secrets stockés » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 « Migrer un stockage existant » (§II) -->
+
 # Mots de passe — hacher, saler, policer
 
 > En 2012, LinkedIn perd **117 millions** de mots de passe, stockés en SHA-1
@@ -10,7 +12,7 @@
 > banque, plateforme de données. Un stockage négligé ne se répare jamais tout à
 > fait.
 
-**Durée de lecture :** 65 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
+**Durée :** ≈ 23 min — lecture ≈ 15 min + atelier 8 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
 
 ---
 
@@ -34,8 +36,9 @@ applications existantes, du plus grave au moins grave.
 ### Le secret en clair
 
 La base contient le mot de passe lui-même. Quiconque lit la base — administrateur,
-sauvegarde volée, injection SQL — lit tous les secrets. Et comme les personnes
-réutilisent leurs mots de passe, la brèche déborde largement sur l'application.
+sauvegarde volée, injection SQL (Structured Query Language) — lit tous les
+secrets. Et comme les personnes réutilisent leurs mots de passe, la brèche
+déborde largement sur l'application.
 
 > ⛔ **Piège de sécurité**
 > Un support technique qui « lit le mot de passe pour dépanner » prouve que le
@@ -141,6 +144,8 @@ if bcrypt.checkpw(mot_de_passe.encode(), empreinte):
 
 ### Migrer un stockage existant
 
+> ⚠️ **À ARBITRER** — sous-section utile mais technique, et hors des objectifs déclarés du chapitre : la déplacer en « Aller plus loin » est envisageable. Contenu conservé en l'état.
+
 Une application ancienne ne se met pas à jour en un jour. La migration
 transparente classique : à la **prochaine connexion réussie**, re-hacher le mot de
 passe avec l'algorithme moderne et remplacer l'empreinte — l'utilisateur ne voit
@@ -174,6 +179,8 @@ Deux obligations ne changent pas :
   transformer la limitation en déni de service contre la victime.
 
 ### La proportionnalité, encore
+
+> ⚠️ **À ARBITRER** — rappel de la proportionnalité, reprise presque à l'identique au chapitre 06 (« Le coût de la friction ») : n'en garder qu'un seul passage est envisageable. Contenu conservé en l'état.
 
 Un formulaire de commentaire public et la console d'administration d'une
 plateforme de données n'appellent pas la même politique. Ce sont les données
