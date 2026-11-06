@@ -83,5 +83,5 @@ Avant de confronter votre proposition à la grille de vérification, vérifiez q
 ## Grille de vérification
 
 Ce défi n'a pas de correction pas-à-pas : confrontez votre travail à la
-[grille de vérification](../corrige/04-defi-mfa.md), qui liste les critères
+[grille de vérification](corrige/04-defi-mfa.md), qui liste les critères
 attendus et les écueils fréquents.

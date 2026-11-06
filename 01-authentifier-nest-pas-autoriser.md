@@ -1,7 +1,5 @@
 [Sommaire](Readme.md) · [Chapitre suivant →](02-mots-de-passe.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « la route /admin/clients » (§I) · ✅ correction juste après l'atelier · 📘 §§ I à III · 🔵 pas d'ancrage dédié dans le chapitre — application sur les travaux pratiques de la journée -->
-
 # Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité
 
 > Un client de **DIGICHEESE** (la fromagerie du fil rouge) se connecte à son compte
@@ -107,8 +105,6 @@ clairement que dans l'extrait de code ci-dessus. Les formes les plus fréquentes
 - **La session oubliée** — pas d'expiration, pas d'invalidation à la déconnexion,
   jeton transmis sans chiffrement : la preuve de connexion survit à celui qui l'a
   obtenue.
-
-> ⚠️ **À ARBITRER** — la puce « La session oubliée » ci-dessus est traitée en détail au chapitre [Sessions](03-sessions.md) : la réduire à une phrase, ou la retirer de ce chapitre, est envisageable. Contenu conservé en l'état.
 
 Ces erreurs ont un point commun : le contrôle qui manque porte sur les **droits**,
 pas sur l'identité. La question à se poser, ligne après ligne : *ce que je viens

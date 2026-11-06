@@ -1,7 +1,5 @@
 [← Chapitre précédent](02-mots-de-passe.md) · [Sommaire](Readme.md) · [Chapitre suivant →](04-jwt-et-tokens.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « décoder le jeton » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 le test de déconnexion (§III, encadré « Astuce ») -->
-
 # Sessions — le badge de connexion
 
 > Vous consultez votre compte bancaire en ligne. Entre la connexion et la
@@ -40,8 +38,6 @@ Deux modèles coexistent :
 | --- | --- | --- | --- |
 | Session côté serveur | le serveur garde un dictionnaire identifiant → données | révocation immédiate | état à partager entre les serveurs d'un cluster |
 | Jeton signé (sans état) | le jeton porte lui-même les informations | aucun état serveur, monte en charge | la révocation demande des mesures supplémentaires |
-
-> ⚠️ **À ARBITRER** — la ligne « Jeton signé (sans état) » ci-dessus annonce le chapitre [JWT et tokens](04-jwt-et-tokens.md), qui la développe : la retirer de ce tableau est envisageable. Contenu conservé en l'état.
 
 ### Un jeton que l'on porte
 

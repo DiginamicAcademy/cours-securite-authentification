@@ -1,7 +1,5 @@
 [← Chapitre précédent](01-authentifier-nest-pas-autoriser.md) · [Sommaire](Readme.md) · [Chapitre suivant →](03-sessions.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « lister les secrets stockés » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 « Migrer un stockage existant » (§II) -->
-
 # Mots de passe — hacher, saler, policer
 
 > En 2012, LinkedIn perd **117 millions** de mots de passe, stockés en SHA-1
@@ -144,8 +142,6 @@ if bcrypt.checkpw(mot_de_passe.encode(), empreinte):
 
 ### Migrer un stockage existant
 
-> ⚠️ **À ARBITRER** — sous-section utile mais technique, et hors des objectifs déclarés du chapitre : la déplacer en « Aller plus loin » est envisageable. Contenu conservé en l'état.
-
 Une application ancienne ne se met pas à jour en un jour. La migration
 transparente classique : à la **prochaine connexion réussie**, re-hacher le mot de
 passe avec l'algorithme moderne et remplacer l'empreinte — l'utilisateur ne voit
@@ -179,8 +175,6 @@ Deux obligations ne changent pas :
   transformer la limitation en déni de service contre la victime.
 
 ### La proportionnalité, encore
-
-> ⚠️ **À ARBITRER** — rappel de la proportionnalité, reprise presque à l'identique au chapitre 06 (« Le coût de la friction ») : n'en garder qu'un seul passage est envisageable. Contenu conservé en l'état.
 
 Un formulaire de commentaire public et la console d'administration d'une
 plateforme de données n'appellent pas la même politique. Ce sont les données

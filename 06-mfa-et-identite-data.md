@@ -1,7 +1,5 @@
 [← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « MFA pertinente ou excessive » (§I) · ✅ correction juste après l'atelier · 📘 §§ I à III · 🔵 les règles du compte de service (§III) sur un pipeline du fil rouge -->
-
 # MFA et identité data — humains et machines
 
 > Une administratrice de plateforme de données se connecte à l'entrepôt avec un
@@ -89,8 +87,6 @@ d'exception. C'est le sujet de l'exercice de fin de journée.
 ---
 
 ## II. Passkeys — la fin du mot de passe
-
-> ⚠️ **À ARBITRER** — section hors des objectifs déclarés du chapitre : soit rattacher un objectif sur les passkeys, soit la déplacer en « Aller plus loin », soit la retirer si le temps est compté. Contenu conservé en l'état.
 
 Une **passkey** remplace le couple identifiant / mot de passe par une paire de
 clés cryptographiques :

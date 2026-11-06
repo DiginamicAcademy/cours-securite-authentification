@@ -1,7 +1,5 @@
 [← Chapitre précédent](03-sessions.md) · [Sommaire](Readme.md) · [Chapitre suivant →](05-oauth2-oidc.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « fabriquer et casser un jeton » (§I) · ✅ correction juste après l'atelier · 📘 §§ II et III · 🔵 la liste de contrôle « Contrôler un jeton reçu » (§III) -->
-
 # JWT et tokens — la lettre signée
 
 > Un serveur qui vous a identifié vous remet parfois une **lettre signée** :
@@ -150,8 +148,6 @@ Sur la révocation, deux écoles :
 - **Liste noire** : le serveur garde une liste de jetons invalidés, vérifiée à
   chaque requête. Cela réintroduit un état serveur — et donc une base à
   interroger vite.
-
-> ⚠️ **À ARBITRER** — détail d'implémentation (marge d'horloge sur `exp`) : utile en production, mais secondaire pour une journée d'initiation — suppression ou déplacement en « Aller plus loin » envisageables. Contenu conservé en l'état.
 
 Un détail d'implémentation qui coûte cher : tolérer une petite différence
 d'horloge entre serveurs (quelques secondes de marge sur `exp`), sans quoi des

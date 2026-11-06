@@ -8,7 +8,7 @@
 # Sécurisation des accès par l'authentification
 
 > Cours d'**autoformation** · **RNCP40573** Expert en informatique et systèmes d'information · spécialisation **4B Big Data & IA**
-> 1 journée(s) · supports **rédigés par IA**, relus et validés.
+> 1 journée · supports **rédigés par IA**, relus et validés.
 
 ---
 
@@ -34,12 +34,12 @@ Vous serez capable de :
 
 | # | Chapitre | Durée de lecture |
 | --- | --- | --- |
-| 01 | [Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité](01-authentifier-nest-pas-autoriser.md) | 45 min |
-| 02 | [Mots de passe — hacher, saler, policer](02-mots-de-passe.md) | 65 min |
-| 03 | [Sessions — le badge de connexion](03-sessions.md) | 60 min |
-| 04 | [JWT et tokens — la lettre signée](04-jwt-et-tokens.md) | 65 min |
-| 05 | [OAuth2 et OpenID Connect — donner un accès limité](05-oauth2-oidc.md) | 70 min |
-| 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 50 min |
+| 01 | [Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité](01-authentifier-nest-pas-autoriser.md) | 15 min |
+| 02 | [Mots de passe — hacher, saler, policer](02-mots-de-passe.md) | 23 min |
+| 03 | [Sessions — le badge de connexion](03-sessions.md) | 16 min |
+| 04 | [JWT et tokens — la lettre signée](04-jwt-et-tokens.md) | 20 min |
+| 05 | [OAuth2 et OpenID Connect — donner un accès limité](05-oauth2-oidc.md) | 17 min |
+| 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 19 min |
 
 **Travaux pratiques**
 
@@ -52,17 +52,16 @@ Vous serez capable de :
 
 ---
 
-## ✅ Checkpoints de fin de journée
+## ✅ Checkpoints de fin de parcours
 
-À cocher avant de passer à la journée suivante. En cas de doute : ne pas
-avancer, revenir au concept concerné, refaire l'exercice.
+À cocher avant de clôturer le cours. En cas de doute : ne pas s'arrêter là,
+revenir au concept concerné, refaire l'exercice.
 
-### Jour 4 — chapitres 01 à 06
+### Chapitres 01 à 06
 
 - [ ] J'ai lu les chapitres 01 à 06 et les points clés sont clairs.
-- [ ] J'ai fait au moins les exercices 🟢 et 🟡 (partie principale), et vérifié mes réponses dans `tp/corrige/`. Les extensions « Pour aller plus loin » sont facultatives.
-- [ ] J'ai répondu au QCM formatif, lorsqu'il est disponible, et identifié mes notions à revoir.
-- [ ] Je sais expliquer, avec mes mots, les 2-3 idées principales de la journée.
+- [ ] J'ai fait au moins les exercices 🟢 et 🟡 (partie principale), et vérifié mes réponses dans `tp/corrige/`. Les extensions « Pour aller plus loin » sont facultatives.
+- [ ] Je sais expliquer, avec mes mots, les 2-3 idées principales du cours.
 - [ ] Je peux appliquer ces idées à un cas simple (un extrait de code, une config, un flux).
 
 ---

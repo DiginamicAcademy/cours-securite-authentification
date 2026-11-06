@@ -1,7 +1,5 @@
 [← Chapitre précédent](04-jwt-et-tokens.md) · [Sommaire](Readme.md) · [Chapitre suivant →](06-mfa-et-identite-data.md)
 
-<!-- MODE TD : 🟢 découverte → ✅ correction → 📘 cours → 🔵 application — emplacements visés : 🟢 atelier « suivre le déroulement pas à pas » (§II) · ✅ correction juste après l'atelier · 📘 §§ I à III · 🔵 le choix clé d'API ou jeton délégué (§II) -->
-
 # OAuth2 et OpenID Connect — donner un accès limité
 
 > Avant OAuth, une application qui voulait accéder à vos photos vous demandait
@@ -141,8 +139,6 @@ réponse : c'est une couche **au-dessus** d'OAuth2, pas un concurrent.
 > `iss`, `aud`, `exp` — avant de faire confiance à son contenu.
 
 ### Le cas du tableau de bord
-
-> ⚠️ **À ARBITRER** — synthèse qui reprend le scénario d'ouverture du chapitre : raccourcie ou supprimée si la journée est courte. Contenu conservé en l'état.
 
 Pour notre plateforme de business intelligence, la séparation devient nette :
 
