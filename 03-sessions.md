@@ -247,7 +247,7 @@ Avant de passer au corrigé, vérifiez que :
 
 ---
 
-#### Pour aller plus loin
+#### Prolongement de l'exercice
 
 *Facultatif.* La billetterie passe sur deux serveurs derrière un répartiteur de
 charge. Où placer les données de session, et que se passe-t-il si un utilisateur

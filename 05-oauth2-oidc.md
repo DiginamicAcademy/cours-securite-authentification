@@ -235,7 +235,7 @@ Avant de passer au corrigé, vérifiez que :
 
 ---
 
-#### Pour aller plus loin
+#### Prolongement de l'exercice
 
 *Facultatif.* Le partenaire souhaite une version mobile du tableau de bord, sans
 secret client embarqué. Quel mécanisme ajoutez-vous, et quelle menace spécifique

@@ -181,7 +181,7 @@ Avant de passer au corrigé, vérifiez que :
 
 ---
 
-#### Pour aller plus loin
+#### Prolongement de l'exercice
 
 *Facultatif.* Le scénario suppose un attaquant revendeur, donc authentifié. Refaites
 l'exercice en supposant qu'il ne possède **aucun compte** : quelles failles lui
