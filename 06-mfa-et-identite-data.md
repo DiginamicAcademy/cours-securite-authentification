@@ -1,4 +1,4 @@
-[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)
+[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md) · [Chapitre suivant →](A-Glossaire-et-ressources.md)
 
 # MFA et identité data — humains et machines
 
@@ -190,4 +190,4 @@ la journée.*
 
 ---
 
-[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md)
+[← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md) · [Chapitre suivant →](A-Glossaire-et-ressources.md)
