@@ -9,6 +9,8 @@
 
 **Durée :** ≈ 15 min — lecture ≈ 10 min + atelier 5 min · **Prérequis :** aucun
 
+> 📖 Vocabulaire et acronymes : [glossaire du cours](A-Glossaire-et-ressources.md).
+
 ---
 
 ## Objectifs
@@ -139,6 +141,71 @@ la journée.*
   **a**, ce qu'on **est** — chacune se combine, aucune ne suffit.
 - « Connecté » ne veut pas dire « autorisé » : confondre les deux est la faille la
   plus fréquente.
+
+---
+
+## 🧠 Vérifiez vos acquis
+
+*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+
+**1.** Un client connecté de DIGICHEESE ouvre `/admin/clients` et récupère la liste complète des clients de la boutique. Qu'est-ce qui a manqué ?
+
+- A. Une authentification : le client n'était pas identifié
+- B. Une autorisation : personne n'a vérifié ce qu'il avait le droit de voir
+- C. Une MFA : un second facteur aurait bloqué la requête
+- D. Une session plus courte : elle a duré trop longtemps
+
+- [ ] ✓ je savais
+
+**2.** Un client authentifié ouvre `/commandes/42` et tombe sur la commande d'un autre. Quelle vérification manque ?
+
+- A. Le serveur n'a pas vérifié que la commande 42 appartient bien au compte connecté
+- B. Le serveur a vérifié l'identité au lieu de vérifier les droits
+- C. Le compte aurait dû passer par un second facteur
+- D. Les numéros de commande n'auraient pas dû se suivre
+
+- [ ] ✓ je savais
+
+**3.** Quel moyen de preuve appartient à la même famille qu'un mot de passe ?
+
+- A. Une empreinte digitale
+- B. Une question secrète
+- C. Un code reçu sur le téléphone
+- D. Une carte d'agent
+
+- [ ] ✓ je savais
+
+**4.** Face à une fuite de données, pourquoi la biométrie est-elle la plus fragile des trois familles ?
+
+- A. Elle se devine plus vite qu'un mot de passe
+- B. Elle ne se change pas : une empreinte fuitée l'est pour toujours
+- C. Elle se prête à un tiers
+- D. Elle ne peut pas être combinée avec un autre facteur
+
+- [ ] ✓ je savais
+
+**5.** *Question ouverte (2-3 lignes).* Le chapitre compare la session au badge d'un musée : « il prouve que vous êtes entré par la caisse, pas que vous pouvez ouvrir les réserves ». Que prouve ce badge, que ne prouve-t-il pas ? Illustrez avec un exemple pris dans ce chapitre.
+
+- [ ] ✓ je savais
+
+---
+
+### Réponses
+
+**1. B.** L'identité était établie, le contrôle des droits n'existait pas.
+**Pourquoi :** AuthN et AuthZ sont deux portes distinctes, et « connecté » ne veut pas dire « autorisé ».
+
+**2. A.** C'est l'erreur « la donnée confiée à l'identifiant de l'adresse » : chaque numéro devient une porte d'entrée si l'appartenance n'est pas vérifiée.
+**Pourquoi :** savoir *qui* a fait la requête ne dit rien sur le droit de voir *cette* ressource-là.
+
+**3. B.** Question secrète et mot de passe sont deux preuves de « ce qu'on sait ».
+**Pourquoi :** même famille, mêmes fragilités — fuite, réutilisation, devinette.
+
+**4. B.** Une empreinte ne se révoque pas, contrairement à un mot de passe qu'on change ou à une carte qu'on bloque.
+**Pourquoi :** c'est la fragilité principale de la famille « ce qu'on est », telle que la pose le tableau des vecteurs.
+
+**5.** Attendu : le badge prouve que l'authentification a réussi et permet d'être reconnu à chaque requête ; il ne dit rien des droits. Exemple attendu : le client authentifié qui voit les commandes de toute la boutique, ou le bouton « Administration » masqué dans l'interface alors que l'API répond.
+**Pourquoi :** la session est la preuve de l'authentification qui circule — elle se protège, mais elle ne remplace jamais la consultation des droits.
 
 ---
 

@@ -140,7 +140,7 @@ journée.
 ## Dans ce cours
 
 - Les quatre exercices de la journée : le dossier `tp/`, avec leurs corrigés dans `tp/corrige/`.
-- Le lab des ateliers des chapitres 02 à 04 : `cd lab && docker compose up --build -d`, comme indiqué dans les chapitres — le service `db` pour les stockages de mots de passe, le service `secure` pour le jeton et la session.
+- Le lab des ateliers des chapitres 02 et 03 : `cd lab && docker compose up --build -d`, comme indiqué dans les chapitres — le service `db` pour les stockages de mots de passe, le service `secure` pour le jeton et la session. Le dossier `lab/` est fourni par votre formateur : placez-le à la racine du cours.
 
 ---
 

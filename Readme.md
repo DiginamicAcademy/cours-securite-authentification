@@ -27,7 +27,11 @@ Vous serez capable de :
 - **Distinguer** authentification, autorisation et session, et nommer le contrôle en jeu dans un cas concret.
 - **Identifier** les vecteurs d'identité — ce qu'on sait, ce qu'on a, ce qu'on est — et leur fragilité.
 - **Repérer** une confusion entre authentification et autorisation dans un scénario ou un extrait de code.
-- **Expliquer** pourquoi « être connecté » ne donne pas automatiquement tous les droits.
+- **Choisir** un stockage de mots de passe sûr — algorithme de hachage, sel, politique — et justifier la migration d'un stockage existant.
+- **Sécuriser** une session : drapeaux du cookie, expiration, invalidation côté serveur à la déconnexion.
+- **Vérifier** un jeton signé (JWT) et énumérer les contrôles à appliquer avant d'accepter sa charge utile.
+- **Sélectionner** le mécanisme d'accès délégué adapté à un cas — clé d'API, OAuth2, OpenID Connect — et en expliquer les limites.
+- **Concevoir** une politique MFA accessible (facteurs, repli, accessibilité) et les règles applicables aux comptes de service.
 - **Proposer** les corrections d'un contrôle d'accès défaillant, classées par urgence selon un critère explicite.
 
 ## Sommaire
@@ -42,14 +46,20 @@ Vous serez capable de :
 | 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 19 min |
 | A | [Glossaire et ressources](A-Glossaire-et-ressources.md) | annexe, à consulter |
 
+> Les ateliers des chapitres 02 et 03 s'exécutent dans le **lab partagé** du parcours : le dossier `lab/` est fourni par votre formateur (il n'est pas dans ce dépôt). Placez-le à la racine du cours, puis `cd lab && docker compose up --build -d` (Docker requis).
+
 **Travaux pratiques**
+
+Niveaux : 🟢 Débutant · 🟡 Intermédiaire · 🔵 Intégration · 🔴 Défi (facultatif).
 
 | | Sujet | Durée |
 | --- | --- | --- |
 | 🟢 | [Exercice — Diagnostiquer l'authentification d'une application](tp/01-diagnostiquer-auth.md) · [corrigé](tp/corrige/01-diagnostiquer-auth.md) | 25 min |
 | 🟡 | [Exercice — Sécuriser la session d'une application](tp/02-securiser-session.md) · [corrigé](tp/corrige/02-securiser-session.md) | 45 min |
 | 🔵 | [Exercice — Concevoir l'authentification d'une API de données](tp/03-concevoir-auth-api.md) · [corrigé](tp/corrige/03-concevoir-auth-api.md) | 55 min |
-| 🔴 | [Exercice — Proposer une politique MFA accessible et conforme](tp/04-defi-mfa.md) · [corrigé](tp/corrige/04-defi-mfa.md) | — |
+| 🔴 | [Exercice — Proposer une politique MFA accessible et conforme](tp/04-defi-mfa.md) · [corrigé](tp/corrige/04-defi-mfa.md) | ≈ 30 min |
+
+> Le PDF de ce cours assemble les chapitres et le glossaire ; les exercices et leurs corrigés (`tp/`) se lisent dans le dépôt.
 
 ---
 
@@ -62,6 +72,7 @@ revenir au concept concerné, refaire l'exercice.
 
 - [ ] J'ai lu les chapitres 01 à 06 et les points clés sont clairs.
 - [ ] J'ai fait au moins les exercices 🟢 et 🟡 (partie principale), et vérifié mes réponses dans `tp/corrige/`. Les extensions « Pour aller plus loin » sont facultatives.
+- [ ] J'ai fait les auto-évaluations « Vérifiez vos acquis » de fin de chapitre (formatives, jamais notées) et repris les questions manquées.
 - [ ] Je sais expliquer, avec mes mots, les 2-3 idées principales du cours.
 - [ ] Je peux appliquer ces idées à un cas simple (un extrait de code, une config, un flux).
 

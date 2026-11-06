@@ -11,8 +11,7 @@ GitHub et le support PDF les affichent.
 | `Logo-diginamic-color.svg` | clair | en-tête du Readme et du support PDF |
 | `Logo-diginamic-color-blk.png` | sombre | en-tête du Readme quand GitHub est en thème sombre |
 
-Les deux logos sont des copies du dépôt
-[PublicAssets](https://github.com/DiginamicInternal/PublicAssets). Le texte de
+Les deux logos sont les copies de travail des logos Diginamic. Le texte de
 la version `-blk`, gris très clair, disparaît sur fond blanc : c'est pourquoi le
 Readme les déclare toutes les deux dans une balise `<picture>`. GitHub choisit
 selon le thème du lecteur ; pour le PDF, imprimé sur fond blanc, le workflow ne

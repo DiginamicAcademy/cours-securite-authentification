@@ -190,4 +190,69 @@ la journée.*
 
 ---
 
+## 🧠 Vérifiez vos acquis
+
+*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+
+**1.** Un compte exige un mot de passe, puis la réponse à une question secrète. Est-ce de la MFA ?
+
+- A. Oui : deux preuves sont demandées
+- B. Non : les deux appartiennent à la même famille, « ce qu'on sait »
+- C. Oui, si la question secrète est assez difficile
+- D. Non : la MFA suppose toujours un objet physique
+
+- [ ] ✓ je savais
+
+**2.** Contre quoi la MFA ne protège-t-elle pas ?
+
+- A. Un mot de passe fuité seul
+- B. Une session déjà ouverte, ou un poste compromis par un malware
+- C. La devinette d'un mot de passe court
+- D. La réutilisation d'un même mot de passe sur deux services
+
+- [ ] ✓ je savais
+
+**3.** Quelle affirmation est correcte ?
+
+- A. Le SMS est le facteur à privilégier : universel, le NIST le recommande en premier
+- B. Une politique MFA doit prévoir un facteur de repli documenté, sinon elle exclut des personnes
+- C. La biométrie est le facteur le plus sûr, puisqu'une empreinte ne se devine pas
+- D. La « fatigue de validation » menace l'application TOTP, pas les notifications push
+
+- [ ] ✓ je savais
+
+**4.** Quelle affirmation sur les passkeys est correcte ?
+
+- A. Le service stocke la clé privée de l'utilisateur, chiffrée
+- B. Elles résistent à l'hameçonnage parce que l'appareil refuse de signer pour un domaine autre que celui enregistré
+- C. On récupère un compte perdu avec la procédure « mot de passe oublié »
+- D. On peut les réutiliser d'un site à l'autre, comme un mot de passe
+
+- [ ] ✓ je savais
+
+**5.** *Question ouverte (2-3 lignes).* Le pipeline Airflow qui charge les ventes chaque nuit possède son propre compte de service. Énoncez trois règles d'encadrement de ce compte, et ce que chacune apporte.
+
+- [ ] ✓ je savais
+
+---
+
+### Réponses
+
+**1. B.** La MFA exige des preuves de familles différentes : deux preuves de « ce qu'on sait » ne valent qu'un seul facteur, avec les mêmes fragilités.
+**Pourquoi :** l'effet recherché est que le vol d'une preuve ne suffise plus — ce qui suppose une preuve d'une autre famille, « ce qu'on a » ou « ce qu'on est ».
+
+**2. B.** La MFA ne protège ni d'une session déjà ouverte, ni d'un malware sur le poste, ni des relais d'hameçonnage qui transmettent le code au moment où on le tape.
+**Pourquoi :** elle renforce l'instant de la connexion, pas ce qui se passe après — ni le poste lui-même.
+
+**3. B.** Une politique qui suppose « un smartphone à portée de main » exclut des personnes : elle prévoit un facteur de repli (clé matérielle, code imprimé à usage unique, assistance du service desk) et une procédure d'exception documentée.
+**Pourquoi :** les autres affirmations inversent le cours — le NIST restreint le SMS (interception, échange de carte SIM), une empreinte fuitée ne se révoque pas, et la fatigue de validation est le défaut de la notification push.
+
+**4. B.** La clé privée ne sort pas de l'appareil et la signature est liée au domaine enregistré : un faux site ne reçoit rien.
+**Pourquoi :** le service ne détient que la clé publique, la réutilisation est impossible par construction — et « mot de passe oublié » n'existant plus, la récupération de compte devient le point sensible (second appareil enregistré ou vérification d'identité).
+
+**5.** Attendu (trois parmi) : un compte par usage, pour qu'un incident reste borné ; le moindre privilège — insérer dans `ventes_journalieres`, pas lire la table des salaires ; les secrets hors du code, dans un coffre injecté à l'exécution, car une clé dans un dépôt Git l'est pour toujours ; la rotation périodique et immédiate en cas de suspicion ; la journalisation, un compte qui se met à lister des tables inconnues étant un signal. La MFA est sans objet : la credential est unique.
+**Pourquoi :** personne ne surveille un pipeline comme on surveille une personne — la protection ne peut pas reposer sur un facteur humain.
+
+---
+
 [← Chapitre précédent](05-oauth2-oidc.md) · [Sommaire](Readme.md) · [Chapitre suivant →](A-Glossaire-et-ressources.md)

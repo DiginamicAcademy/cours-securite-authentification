@@ -10,6 +10,8 @@
 
 **Durée :** ≈ 16 min — lecture ≈ 11 min + atelier 5 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
 
+> 📖 Vocabulaire et acronymes : [glossaire du cours](A-Glossaire-et-ressources.md).
+
 ---
 
 ## Objectifs
@@ -65,8 +67,8 @@ python3 -c "import base64,sys; p=sys.argv[1].split('.')[0]; print(base64.urlsafe
 
 > Vous y lisez le nom d'utilisateur. Le reste du jeton est une **signature** : le
 > serveur vérifie que personne n'a modifié le contenu, sans interroger de base de
-> données. Dans ce lab, le jeton expire après **1 heure** — retrouvez ce chiffre
-> dans le code du service `secure`.
+> données. Dans ce lab, le jeton expire **1 heure après son émission** — retrouvez
+> ce chiffre dans le code du service `secure`.
 
 ---
 
@@ -129,8 +131,9 @@ Une session ouverte indéfiniment est un passif. Deux durées se combinent :
 - l'**expiration absolue** : au-delà d'une durée maximale, la session se termine
   même si elle est active — un jeton volé ne reste pas exploitable des semaines.
 
-Le lab fixe une seule limite, d'une heure. Une application bancaire combine les
-deux ; un outil interne peut être plus laxiste. C'est un arbitrage de
+Le lab fixe une seule limite, d'une heure à compter de l'émission du jeton —
+une limite absolue, qui court même si la session reste active. Une application
+bancaire combine les deux ; un outil interne peut être plus laxiste. C'est un arbitrage de
 proportionnalité, pas une constante universelle.
 
 ### La déconnexion
@@ -176,6 +179,71 @@ la journée.*
   depuis un autre site — aucun drapeau ne remplace HTTPS.
 - Une session se termine **des deux côtés** : expiration côté serveur **et**
   invalidation à la déconnexion.
+
+---
+
+## 🧠 Vérifiez vos acquis
+
+*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+
+**1.** Un attaquant envoie à votre victime un lien contenant un identifiant de session. Elle se connecte depuis ce lien, et l'application conserve le même identifiant après la connexion. Quelle attaque, et quelle défense ?
+
+- A. Détournement de session — ajouter le drapeau `HttpOnly`
+- B. Fixation de session — régénérer l'identifiant à la connexion
+- C. Détournement de session — passer tout le site en HTTPS
+- D. Fixation de session — raccourcir l'expiration par inactivité
+
+- [ ] ✓ je savais
+
+**2.** Un script injecté (XSS) sur votre site parvient à lire le cookie de session. Quel drapeau manquait ?
+
+- A. `HttpOnly`
+- B. `Secure`
+- C. `SameSite=Lax`
+- D. `Max-Age=3600`
+
+- [ ] ✓ je savais
+
+**3.** Depuis trois semaines, une session reste ouverte sur un poste partagé : l'utilisatrice est active, le serveur ne la ferme jamais. Quelle durée aurait dû la fermer ?
+
+- A. L'expiration par inactivité
+- B. L'expiration absolue
+- C. Le drapeau `Secure`
+- D. Aucune : une session active n'a pas à être fermée
+
+- [ ] ✓ je savais
+
+**4.** Votre déconnexion se contente d'effacer le cookie du navigateur. Un attaquant avait copié le jeton avant. Que se passe-t-il ?
+
+- A. Rien : le jeton meurt en même temps que le cookie
+- B. Le jeton fonctionne toujours : la session n'a pas été invalidée côté serveur
+- C. Le serveur invalide le jeton automatiquement dès que le cookie part
+- D. Le jeton devient inutilisable parce que l'identifiant est régénéré
+
+- [ ] ✓ je savais
+
+**5.** *Question ouverte (2-3 lignes).* Deux modèles de session coexistent : session côté serveur et jeton signé sans état. Pour un cluster de dix serveurs qui doit monter en charge, lequel choisissez-vous, et qu'acceptez-vous en échange ?
+
+- [ ] ✓ je savais
+
+---
+
+### Réponses
+
+**1. B.** C'est la fixation : l'attaquant a choisi l'identifiant et l'a fait adopter par la victime. La défense est de régénérer l'identifiant à la connexion, et à chaque changement de privilège.
+**Pourquoi :** un identifiant attribué avant la connexion ne doit jamais survivre à celle-ci ; les drapeaux et HTTPS protègent contre le vol, pas contre l'imposition.
+
+**2. A.** `HttpOnly` retire le cookie au JavaScript, donc au script injecté.
+**Pourquoi :** chaque drapeau a sa menace et sa limite — `Secure` ne protège que le transport, `SameSite` que les requêtes forgées venues d'un autre site, et aucun ne remplace HTTPS.
+
+**3. B.** L'expiration absolue termine la session au-delà d'une durée maximale même si elle est active ; celle par inactivité ne ferme qu'un poste oublié.
+**Pourquoi :** les deux se combinent — l'inactivité protège le poste laissé ouvert, l'absolue empêche un jeton volé de rester exploitable des semaines.
+
+**4. B.** Le jeton copié rouvre la session : se déconnecter, c'est invalider côté serveur, puis effacer le cookie.
+**Pourquoi :** le test du chapitre est justement de copier le jeton, de se déconnecter, puis de le rejouer avec `curl` — s'il passe, la déconnexion est fausse.
+
+**5.** Attendu : le jeton signé sans état, parce qu'il porte lui-même ses informations et évite de partager un dictionnaire de sessions entre les serveurs ; en échange, la révocation n'est plus immédiate et demande des mesures supplémentaires (durées courtes, liste de jetons invalidés).
+**Pourquoi :** la session côté serveur offre une révocation immédiate mais un état à partager dans le cluster — on choisit selon la contrainte qui domine.
 
 ---
 

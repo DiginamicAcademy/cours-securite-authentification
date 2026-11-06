@@ -1,6 +1,6 @@
 # Exercice — Sécuriser la session d'une application
 
-> 🟡 **À vous de jouer** · **Durée :** 45 min · **Lien :** chapitre [Sessions — le badge de connexion](../03-sessions.md)
+> 🟡 **Intermédiaire** · **Durée :** 45 min · **Lien :** chapitre [Sessions — le badge de connexion](../03-sessions.md)
 > **Objectif :** repérer les failles de gestion de session dans un extrait de code, puis le corriger (drapeaux, expiration, invalidation).
 
 ---

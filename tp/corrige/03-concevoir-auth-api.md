@@ -80,7 +80,7 @@ Contrôles appliqués à chaque requête :
 
 1. **Vérifier le jeton** — un JWT (JSON Web Token) : signature, algorithme en
    liste blanche, expiration, émetteur, destinataire (la liste du chapitre
-   [JWT et tokens](../04-jwt-et-tokens.md)).
+   [JWT et tokens](../../04-jwt-et-tokens.md)).
 2. **Vérifier le périmètre** — `lecture:stocks` ne débloque pas
    `ecriture:agregats`. C'est de l'autorisation, pas de l'authentification.
 3. **Vérifier l'identité appelante** — le compte de service ou la personne

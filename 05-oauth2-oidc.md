@@ -10,6 +10,8 @@
 
 **Durée :** ≈ 17 min — lecture ≈ 12 min + atelier 5 min · **Prérequis :** [JWT et tokens](04-jwt-et-tokens.md)
 
+> 📖 Vocabulaire et acronymes : [glossaire du cours](A-Glossaire-et-ressources.md).
+
 ---
 
 ## Objectifs
@@ -116,6 +118,14 @@ l'API les vérifie à chaque appel. Un jeton `lecture:ventes` ne débloque jamai
 Une clé d'API n'est **pas** un moyen d'authentifier une personne : elle prouve
 qu'un programme est autorisé à appeler, pas qui est derrière.
 
+La ligne « machine à machine » du tableau a un nom dans OAuth2 : le flow
+**client credentials** (identifiants du client). Le programme s'authentifie
+*en son propre nom* — avec son `client_id` et son secret — et reçoit un jeton
+d'accès de durée courte et de périmètre (scope) limité, sans consentement
+humain. C'est l'alternative moderne à la clé d'API brute : même usage (pipeline,
+service à service), mais le jeton est périssable et révocable. Les comptes de
+service du chapitre 6 en appliquent les règles.
+
 ---
 
 ## III. OpenID Connect — l'identité par-dessus l'autorisation
@@ -180,6 +190,71 @@ la journée.*
   jeton volé reste limité à ce qui a été consenti.
 - OpenID Connect ajoute l'**identité** (ID token) à l'autorisation ; une clé
   d'API, elle, identifie un programme — jamais une personne.
+
+---
+
+## 🧠 Vérifiez vos acquis
+
+*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+
+**1.** Ce qu'OAuth2 change par rapport à « donnez-moi votre mot de passe » :
+
+- A. Il chiffre le mot de passe avant de le confier à l'application
+- B. Il accorde un droit limité dans le temps et dans le périmètre, sans partager le secret, et il est révocable
+- C. Il supprime les mots de passe
+- D. Il centralise les mots de passe des applications dans un coffre commun
+
+- [ ] ✓ je savais
+
+**2.** Un tiers intercepte le code d'autorisation qui transite par le navigateur. Peut-il appeler l'API ?
+
+- A. Oui : le code vaut jeton d'accès
+- B. Non : le jeton est échangé directement entre le client et le serveur d'autorisation, avec une preuve d'identité du client
+- C. Oui, mais seulement si le consentement portait un périmètre d'écriture
+- D. Non : le code n'est jamais utilisable, pas même par le client légitime
+
+- [ ] ✓ je savais
+
+**3.** Un jeton d'accès portant le périmètre `lecture:ventes` est volé. Que peut faire l'attaquant ?
+
+- A. Tout : un jeton volé donne le compte complet
+- B. Rien : le vol invalide le jeton
+- C. Lire les ventes uniquement — un jeton ne débloque jamais un périmètre qui n'a pas été consenti
+- D. Écrire les expéditions, mais pas les supprimer
+
+- [ ] ✓ je savais
+
+**4.** Votre tableau de bord doit savoir **qui** consulte, en s'appuyant sur l'identité de l'entreprise, sans jamais voir les mots de passe. Qu'est-ce qui apporte cette réponse ?
+
+- A. Un jeton d'accès OAuth2 avec un périmètre plus large
+- B. Le code d'autorisation
+- C. Le jeton d'identité (ID token) d'OpenID Connect, reçu avec le périmètre `openid`
+- D. Une clé d'API nominative pour chaque utilisateur
+
+- [ ] ✓ je savais
+
+**5.** *Question ouverte (2-3 lignes).* Une équipe veut brancher son outil de business intelligence sur l'entrepôt de données et propose un compte commun `bi_tool` avec un mot de passe partagé. Ce qui ne va pas, ce que vous proposez à la place, qui vérifie quoi.
+
+- [ ] ✓ je savais
+
+---
+
+### Réponses
+
+**1. B.** On ne partage plus son secret : le serveur d'autorisation décide qui a droit à quoi, l'API se contente de vérifier le jeton.
+**Pourquoi :** un secret global ne se retire pas sans tout casser, alors qu'un jeton se révoque jeton par jeton.
+
+**2. B.** Le code transite par le navigateur, mais le jeton s'échange directement entre le client et le serveur d'autorisation, avec une preuve d'identité du client.
+**Pourquoi :** c'est tout l'intérêt du flow authorization code — un code intercepté ne suffit pas à obtenir le jeton.
+
+**3. C.** Les périmètres bornent le jeton et l'API les vérifie à chaque appel : `lecture:ventes` ne débloque jamais `ecriture:expeditions`, même volé.
+**Pourquoi :** un jeton volé reste limité à ce qui a été consenti — c'est ce que le partage de mot de passe ne permettait pas.
+
+**4. C.** OIDC est une couche au-dessus d'OAuth2 : avec le périmètre `openid`, le client reçoit un ID token, JWT signé qui dit qui est l'utilisateur.
+**Pourquoi :** OAuth2 répond « qu'a le droit de faire cette application ? », pas « qui est l'utilisateur ? » — et une clé d'API identifie un programme, jamais une personne.
+
+**5.** Attendu : un compte partagé est un secret global — impossible de savoir qui l'utilise réellement, les droits sont excessifs et la suppression du compte casse tout le monde. À la place : le flow authorization code avec un périmètre `lecture:ventes` pour l'outil (jeton court, révocable), et OIDC pour que les personnes se connectent avec l'identité de leur entreprise. Le serveur d'autorisation décide des droits, l'API ne vérifie ni mot de passe ni identité mais le jeton et ses périmètres.
+**Pourquoi :** OAuth2 sépare le droit du secret — on retire un accès sans toucher au mot de passe de personne.
 
 ---
 

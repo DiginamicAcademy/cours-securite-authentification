@@ -12,6 +12,8 @@
 
 **Durée :** ≈ 23 min — lecture ≈ 15 min + atelier 8 min · **Prérequis :** [Authentifier n'est pas autoriser](01-authentifier-nest-pas-autoriser.md)
 
+> 📖 Vocabulaire et acronymes : [glossaire du cours](A-Glossaire-et-ressources.md).
+
 ---
 
 ## Objectifs
@@ -217,6 +219,71 @@ la journée.*
   augmenter avec le matériel disponible.
 - La politique suit le NIST 800-63B : **longueur** plutôt que complexité, pas de
   rotation forcée, mots de passe fuités refusés, tentatives limitées.
+
+---
+
+## 🧠 Vérifiez vos acquis
+
+*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+
+**1.** En 2012, LinkedIn perd 117 millions d'empreintes SHA-1 **sans sel**. Pourquoi l'absence de sel est-elle si grave ?
+
+- A. SHA-1 produit une empreinte plus courte que MD5
+- B. Sans sel, un même mot de passe donne toujours la même empreinte : les tables arc-en-ciel font le reste
+- C. SHA-1 est un chiffrement réversible dès qu'on connaît la clé
+- D. Le sel ralentit trop le serveur pour être utilisé partout
+
+- [ ] ✓ je savais
+
+**2.** Dans la base du lab, le compte `charlie` porte une empreinte de 32 caractères, et `echo -n "password" | md5sum` redonne exactement cette valeur. De quel stockage s'agit-il ?
+
+- A. Un bcrypt de coût 12
+- B. Un argon2
+- C. Un MD5 sans sel
+- D. Un mot de passe stocké en clair
+
+- [ ] ✓ je savais
+
+**3.** Pourquoi argon2 est-il le choix recommandé pour un nouveau projet ?
+
+- A. Il produit une empreinte plus courte que bcrypt
+- B. Il ajoute la mémoire au calcul : chaque tentative consomme de la RAM, ce qui renchérit l'attaque par GPU ou circuit dédié
+- C. Il est plus rapide que bcrypt, donc le serveur vérifie plus vite
+- D. Il rend le sel inutile
+
+- [ ] ✓ je savais
+
+**4.** Vous appliquez le NIST 800-63B. Lequel de ces comportements est le bon ?
+
+- A. Vous forcez le changement de mot de passe tous les trimestres
+- B. Vous imposez majuscule, chiffre et symbole
+- C. Vous acceptez les phrases de passe longues et vous refusez les mots de passe déjà fuités
+- D. Vous interdisez le copier-coller pour forcer la mémorisation
+
+- [ ] ✓ je savais
+
+**5.** *Question ouverte (2-3 lignes).* Votre application stocke encore des empreintes MD5 sans sel. Décrivez la migration transparente classique, et ce que vous réservez aux comptes les plus exposés.
+
+- [ ] ✓ je savais
+
+---
+
+### Réponses
+
+**1. B.** Sans sel, deux comptes qui choisissent le même mot de passe ont la même empreinte, et une empreinte connue se retrouve par recherche dans une table précalculée.
+**Pourquoi :** le sel annule la précalculaison et oblige à relancer l'attaque compte par compte — il n'empêche pas la devinette, c'est le rôle du coût.
+
+**2. C.** 32 caractères hexadécimaux et un calcul direct qui retombe sur la même valeur : c'est MD5 sans sel, donc devinable à partir d'un dictionnaire.
+**Pourquoi :** une empreinte rapide se casse avec du matériel grand public, en secondes à heures — bcrypt ou argon2 auraient commencé par `$2b$` et annoncé leur coût.
+
+**3. B.** La mémoire obligatoire rend l'attaque par matériel spécialisé coûteuse, là où bcrypt ne ralentit que le temps de calcul.
+**Pourquoi :** un algorithme de mot de passe doit être lent volontairement : la lenteur gêne une vérification par connexion, pas des milliards de tentatives.
+
+**4. C.** Longueur plutôt que complexité, phrases de passe acceptées, mots de passe déjà fuités refusés — et pas de rotation forcée, pas de questions secrètes, copier-coller accepté.
+**Pourquoi :** les règles de complexité produisent des motifs prévisibles et la rotation trimestrielle fait incrémenter le même secret.
+
+**5.** Attendu : à la prochaine connexion réussie, re-hacher le mot de passe avec bcrypt ou argon2 et remplacer l'empreinte, sans que l'utilisateur voie quoi que ce soit ; garder une colonne de version de hachage pour savoir où en est chaque compte ; forcer la réinitialisation des empreintes les plus faibles (clair, MD5) après un délai annoncé.
+**Pourquoi :** on ne peut pas re-hacher ce qu'on ne peut pas relire — seule une connexion réussie redonne le secret le temps du remplacement.
 
 ---
 

@@ -1,6 +1,6 @@
 # Exercice — Proposer une politique MFA accessible et conforme
 
-> 🔴 **Défi** · **Facultatif** · **Lien :** chapitre [MFA et identité data](../06-mfa-et-identite-data.md)
+> 🔴 **Défi** · **Facultatif** · **Durée :** ≈ 30 min · **Lien :** chapitre [MFA et identité data](../06-mfa-et-identite-data.md)
 > **Objectif :** proposer une politique d'authentification multifacteur pour une organisation réelle, en tenant compte de l'accessibilité, du RGPD et de la proportionnalité.
 
 ---
