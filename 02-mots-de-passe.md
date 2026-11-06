@@ -224,16 +224,14 @@ la journée.*
 
 ## 🧠 Vérifiez vos acquis
 
-*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+*Formatif, jamais noté. Répondez sans relire le chapitre. Les réponses se déplient juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
 
 **1.** En 2012, LinkedIn perd 117 millions d'empreintes SHA-1 **sans sel**. Pourquoi l'absence de sel est-elle si grave ?
 
-- A. SHA-1 produit une empreinte plus courte que MD5
+- A. SHA-1 produit une empreinte plus courte que MD5 : moins de combinaisons, elle se retrouve plus vite
 - B. Sans sel, un même mot de passe donne toujours la même empreinte : les tables arc-en-ciel font le reste
-- C. SHA-1 est un chiffrement réversible dès qu'on connaît la clé
-- D. Le sel ralentit trop le serveur pour être utilisé partout
-
-- [ ] ✓ je savais
+- C. SHA-1 est un chiffrement réversible dès qu'on connaît la clé, et les clés des années 2000 sont publiques
+- D. Le sel ralentit trop le serveur pour être généralisé : LinkedIn a préféré s'en passer pour tenir la charge
 
 **2.** Dans la base du lab, le compte `charlie` porte une empreinte de 32 caractères, et `echo -n "password" | md5sum` redonne exactement cette valeur. De quel stockage s'agit-il ?
 
@@ -242,31 +240,27 @@ la journée.*
 - C. Un MD5 sans sel
 - D. Un mot de passe stocké en clair
 
-- [ ] ✓ je savais
-
 **3.** Pourquoi argon2 est-il le choix recommandé pour un nouveau projet ?
 
-- A. Il produit une empreinte plus courte que bcrypt
+- A. Il produit une empreinte plus courte que bcrypt, la base reste petite et les vérifications plus rapides
 - B. Il ajoute la mémoire au calcul : chaque tentative consomme de la RAM, ce qui renchérit l'attaque par GPU ou circuit dédié
-- C. Il est plus rapide que bcrypt, donc le serveur vérifie plus vite
-- D. Il rend le sel inutile
-
-- [ ] ✓ je savais
+- C. Il est plus rapide que bcrypt : le serveur vérifie plus vite et l'utilisateur attend moins longtemps
+- D. Il rend le sel inutile, la mémoire consommée changeant à chaque tentative
 
 **4.** Vous appliquez le NIST 800-63B. Lequel de ces comportements est le bon ?
 
-- A. Vous forcez le changement de mot de passe tous les trimestres
-- B. Vous imposez majuscule, chiffre et symbole
+- A. Vous forcez le changement de mot de passe tous les trimestres, pour qu'un secret fuité ait peu de temps pour servir
+- B. Vous imposez majuscule, chiffre et symbole, pour rendre chaque mot de passe imprévisible malgré les dictionnaires
 - C. Vous acceptez les phrases de passe longues et vous refusez les mots de passe déjà fuités
-- D. Vous interdisez le copier-coller pour forcer la mémorisation
-
-- [ ] ✓ je savais
+- D. Vous interdisez le copier-coller pour forcer la mémorisation et éviter que le secret soit recopié dans un fichier
 
 **5.** *Question ouverte (2-3 lignes).* Votre application stocke encore des empreintes MD5 sans sel. Décrivez la migration transparente classique, et ce que vous réservez aux comptes les plus exposés.
 
-- [ ] ✓ je savais
-
 ---
+
+<details>
+
+<summary>Vérifier ses réponses</summary>
 
 ### Réponses
 
@@ -284,6 +278,8 @@ la journée.*
 
 **5.** Attendu : à la prochaine connexion réussie, re-hacher le mot de passe avec bcrypt ou argon2 et remplacer l'empreinte, sans que l'utilisateur voie quoi que ce soit ; garder une colonne de version de hachage pour savoir où en est chaque compte ; forcer la réinitialisation des empreintes les plus faibles (clair, MD5) après un délai annoncé.
 **Pourquoi :** on ne peut pas re-hacher ce qu'on ne peut pas relire — seule une connexion réussie redonne le secret le temps du remplacement.
+
+</details>
 
 ---
 

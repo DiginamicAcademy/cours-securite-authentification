@@ -160,6 +160,211 @@ jeton délégué.
 
 ---
 
+### Exercice bonus — Proposer une politique MFA accessible et conforme (≈ 30 min, facultatif)
+
+#### Contexte
+
+Un éditeur de logiciels de **200 personnes** veut généraliser la MFA
+(authentification multifacteur) à toute son organisation. Le dossier est confié à
+l'équipe sécurité — la vôtre. Trois populations coexistent :
+
+1. **Les salariés** : développement, comptabilité, support, direction. La
+   comptabilité manipule des données bancaires ; le support accède aux comptes
+   clients.
+2. **Les prestataires externes** : consultants en mission de quelques semaines,
+   souvent sur leur propre matériel.
+3. **Les comptes de service** : les pipelines d'automatisation de la plateforme
+   data (traitements planifiés, sans personne derrière).
+
+La direction a posé ses contraintes :
+
+- la politique doit être **accessible** : parmi les salariés, une personne
+  malvoyante et une personne sans téléphone personnel doivent pouvoir se
+  connecter au quotidien, sans dépendre d'un collègue ;
+- elle doit être **conforme au RGPD** (Règlement général sur la protection des
+  données) : toute donnée biométrique est une donnée sensible, à justifier et à
+  minimiser ;
+- elle doit être **proportionnée** : pas de facteur imposé là où le risque ne le
+  justifie pas — le forum interne n'est pas la comptabilité ;
+- un incident courant — téléphone perdu — doit être traité en **moins de 4
+  heures**, sans laisser le compte ouvert pendant la procédure.
+
+---
+
+#### Consignes
+
+Vous rédigez la proposition qui sera présentée à la direction. Aucun gabarit
+imposé : c'est à vous de choisir la forme qui porte le mieux votre raisonnement.
+
+##### Partie 1 — La politique
+
+Proposez un tableau de politique : pour chaque population (et, si vous le jugez
+utile, par niveau de sensibilité à l'intérieur d'une population), indiquez le
+facteur imposé, le facteur de repli, et le cas d'exception. Chaque ligne est
+accompagnée d'une justification d'une phrase.
+
+##### Partie 2 — L'accessibilité
+
+Décrivez le parcours de connexion des deux salariés cités dans le contexte, du
+quotidien jusqu'à la perte d'un facteur. Expliquez pourquoi votre solution évite
+de les rendre dépendants d'une autre personne — c'est un critère de dignité, pas
+un détail de confort.
+
+##### Partie 3 — Le RGPD
+
+Identifiez les données à caractère personnel que votre politique collecte ou
+utilise, et dites pour chacune : ce qui la justifie, combien de temps elle est
+conservée, et ce qui la rend minimale. Argumentez le cas de la biométrie : où
+l'acceptez-vous, où la refusez-vous, et pourquoi.
+
+##### Partie 4 — L'incident
+
+Rédigez la procédure « téléphone perdu » : qui fait quoi, dans quel ordre, et
+comment la promesse des **moins de 4 heures** est tenue. Précisez ce qui arrive
+aux sessions déjà ouvertes et aux comptes de service concernés.
+
+---
+
+#### ✅ Auto-évaluation
+
+Avant de confronter votre proposition à la grille de vérification, vérifiez que :
+
+- [ ] Chaque ligne de ma politique nomme un **facteur imposé**, un **facteur de repli** et un **cas d'exception** — pas seulement « MFA obligatoire ».
+- [ ] Mes deux salariés se connectent **eux-mêmes**, au quotidien, sans intermédiaire humain.
+- [ ] Chaque donnée personnelle citée est **justifiée, datée de conservation et minimisée**.
+- [ ] Ma position sur la biométrie est **argumentée** (où, pourquoi, et quelle alternative).
+- [ ] Ma procédure d'incident tient les **moins de 4 heures** en nommant qui agit, et coupe les sessions ouvertes.
+
+<details>
+
+<summary>Voir la correction</summary>
+
+> Un défi n'a pas de correction pas-à-pas : confrontez votre proposition aux
+> critères ci-dessous. Ils couvrent la MFA
+> (authentification multifacteur), l'accessibilité, le RGPD et la gestion
+> d'incident. Plusieurs politiques se
+> défendent — ce qui est attendu, c'est que chaque choix soit **dit, justifié et
+> applicable**.
+
+---
+
+#### Partie 1 — La politique
+
+**Critères de vérification :**
+
+- [ ] Le tableau couvre les **trois populations** du contexte, et distingue au
+      moins un niveau de sensibilité (la comptabilité et le forum interne ne
+      demandent pas le même facteur).
+- [ ] Chaque ligne nomme un facteur imposé, un facteur de repli et un cas
+      d'exception — une politique sans repli est incomplète, pas stricte.
+- [ ] Les comptes de service reçoivent un **régime distinct** : pas de MFA (sans
+      objet), mais une credential dédiée, à périmètre minimal et à rotation.
+- [ ] La justification de chaque ligne renvoie à une **donnée exposée** ou à un
+      usage, pas à une règle uniforme.
+
+**Exemples de réponses acceptables :** application TOTP (Time-based One-Time
+Password) imposée pour la
+comptabilité avec clé matérielle en repli ; facteur unique renforcé pour le forum
+interne ; clé de sécurité matérielle pour les administrateurs de la plateforme.
+
+**Écueils fréquents :** « MFA partout, sans exception » — cela viole la
+contrainte d'accessibilité et la proportionnalité. Ou un tableau qui ne parle que
+des salariés, oubliant les prestataires et les pipelines.
+
+---
+
+#### Partie 2 — L'accessibilité
+
+**Critères de vérification :**
+
+- [ ] Le parcours de la personne **malvoyante** est décrit pas à pas, et
+      fonctionne avec ses outils d'assistance (lecteur d'écran, contraste,
+      saisie vocale) — un code à usage unique affiché en image ne passe pas.
+- [ ] Le parcours de la personne **sans téléphone personnel** ne repose pas sur
+      un appareil qui ne lui appartient pas : clé matérielle fournie par
+      l'organisme, code à usage unique imprimé, ou facteur alternatif.
+- [ ] Aucun parcours ne rend la personne **dépendante d'un collègue** pour se
+      connecter (« demandez à quelqu'un de vous lire le code » est un échec).
+- [ ] Le repli est **disponible au quotidien**, pas seulement en dépannage : une
+      solution de secours jamais testée ne fonctionne pas le jour de l'incident.
+
+**Exemples de réponses acceptables :** une clé de sécurité matérielle détectée
+par le lecteur d'écran, validée par un simple toucher ; une liste de codes à usage
+unique, imprimée en gros caractères, renouvelée sur demande.
+
+**Écueils fréquents :** proposer la biométrie comme solution universelle
+d'accessibilité — elle pose d'autres problèmes (section suivante), et une
+empreinte ne se révoque pas.
+
+---
+
+#### Partie 3 — Le RGPD
+
+**Critères de vérification :**
+
+- [ ] Les données en jeu sont **identifiées** : numéro de téléphone — SMS (Short
+      Message Service), donnée biométrique, journal de connexion, adresse IP.
+- [ ] Chaque donnée est accompagnée de sa **finalité**, de sa **durée de
+      conservation** et de sa **minimisation** — on ne collecte pas « au cas où ».
+- [ ] La biométrie est traitée comme une **donnée sensible** : refusée quand un
+      facteur moins intrusif suffit, acceptée seulement quand elle est stockée
+      **sur l'appareil de la personne** (et non dans une base centrale).
+- [ ] Le refus d'un facteur pour raison d'accessibilité n'entraîne **aucune
+      trace stigmatisante** dans le dossier de la personne.
+
+**Exemples de réponses acceptables :** « la biométrie reste sur le téléphone de
+la personne, le serveur ne reçoit qu'une preuve ; nous ne conservons aucune
+empreinte ; alternative disponible pour qui ne peut ou ne veut pas l'utiliser ».
+
+**Écueils fréquents :** une base centrale d'empreintes « pour simplifier les
+reconnexions » — c'est exactement la donnée qu'il ne faut pas centraliser. Ou une
+durée de conservation indéfinie par défaut.
+
+---
+
+#### Partie 4 — L'incident
+
+**Critères de vérification :**
+
+- [ ] La procédure nomme **qui agit** (la personne, le service desk, l'équipe
+      sécurité) et dans quel ordre.
+- [ ] Le compte est **suspendu ou son facteur révoqué** dès la déclaration —
+      jamais laissé ouvert « le temps de vérifier ».
+- [ ] Les **sessions déjà ouvertes** sont invalidées : un facteur perdu ne coupe
+      pas une session volée avec lui.
+- [ ] La promesse des **moins de 4 heures** est tenue par un mécanisme, pas par
+      un engagement moral : permanence, procédure automatisée, ou délégation
+      préparée.
+- [ ] Le cas des **comptes de service** liés à l'appareil perdu est traité :
+      rotation de la credential concernée, pas seulement le compte humain.
+
+**Exemples de réponses acceptables :** déclaration en libre-service qui suspend
+immédiatement le facteur, réactivation sur un nouvel appareil après vérification
+d'identité en visio ou en présentiel, journal de l'incident conservé pour
+l'audit.
+
+**Écueils fréquents :** une procédure qui exige le téléphone perdu pour se
+déclarer — ou qui repose sur une seule personne « qui a les droits ».
+
+---
+
+#### Synthèse
+
+Une politique MFA se juge à trois questions :
+
+1. **Est-elle tenable au quotidien** par toutes les personnes concernées, y
+   compris celles qui ne correspondent pas au profil moyen ?
+2. **Est-elle proportionnée** aux données exposées, et le dit-elle ?
+3. **Se termine-t-elle proprement** — incident, départ, perte de facteur — sans
+   laisser de session ni de credential orpheline ?
+
+Si une question reste sans réponse dans votre proposition, c'est le point à
+reprendre.
+
+</details>
+
+---
+
 ## IV. Aller plus loin
 
 *Ces approfondissements sont facultatifs : ils ne sont jamais exigés pour terminer
@@ -192,16 +397,14 @@ la journée.*
 
 ## 🧠 Vérifiez vos acquis
 
-*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+*Formatif, jamais noté. Répondez sans relire le chapitre. Les réponses se déplient juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
 
 **1.** Un compte exige un mot de passe, puis la réponse à une question secrète. Est-ce de la MFA ?
 
-- A. Oui : deux preuves sont demandées
+- A. Oui : deux preuves sont demandées l'une après l'autre, ce qui suffit à parler de multifacteur
 - B. Non : les deux appartiennent à la même famille, « ce qu'on sait »
-- C. Oui, si la question secrète est assez difficile
-- D. Non : la MFA suppose toujours un objet physique
-
-- [ ] ✓ je savais
+- C. Oui, si la question secrète est assez difficile : sa difficulté compte alors comme un second facteur
+- D. Non : la MFA suppose toujours un objet physique porté par la personne, ce qu'une question ne peut pas être
 
 **2.** Contre quoi la MFA ne protège-t-elle pas ?
 
@@ -210,8 +413,6 @@ la journée.*
 - C. La devinette d'un mot de passe court
 - D. La réutilisation d'un même mot de passe sur deux services
 
-- [ ] ✓ je savais
-
 **3.** Quelle affirmation est correcte ?
 
 - A. Le SMS est le facteur à privilégier : universel, le NIST le recommande en premier
@@ -219,22 +420,20 @@ la journée.*
 - C. La biométrie est le facteur le plus sûr, puisqu'une empreinte ne se devine pas
 - D. La « fatigue de validation » menace l'application TOTP, pas les notifications push
 
-- [ ] ✓ je savais
-
 **4.** Quelle affirmation sur les passkeys est correcte ?
 
-- A. Le service stocke la clé privée de l'utilisateur, chiffrée
+- A. Le service stocke la clé privée de l'utilisateur, chiffrée, et la déverrouille à la connexion
 - B. Elles résistent à l'hameçonnage parce que l'appareil refuse de signer pour un domaine autre que celui enregistré
-- C. On récupère un compte perdu avec la procédure « mot de passe oublié »
-- D. On peut les réutiliser d'un site à l'autre, comme un mot de passe
-
-- [ ] ✓ je savais
+- C. On récupère un compte perdu avec la procédure « mot de passe oublié », envoyée à l'adresse enregistrée
+- D. On peut les réutiliser d'un site à l'autre comme un mot de passe, ce qui simplifie le parc
 
 **5.** *Question ouverte (2-3 lignes).* Le pipeline Airflow qui charge les ventes chaque nuit possède son propre compte de service. Énoncez trois règles d'encadrement de ce compte, et ce que chacune apporte.
 
-- [ ] ✓ je savais
-
 ---
+
+<details>
+
+<summary>Vérifier ses réponses</summary>
 
 ### Réponses
 
@@ -252,6 +451,8 @@ la journée.*
 
 **5.** Attendu (trois parmi) : un compte par usage, pour qu'un incident reste borné ; le moindre privilège — insérer dans `ventes_journalieres`, pas lire la table des salaires ; les secrets hors du code, dans un coffre injecté à l'exécution, car une clé dans un dépôt Git l'est pour toujours ; la rotation périodique et immédiate en cas de suspicion ; la journalisation, un compte qui se met à lister des tables inconnues étant un signal. La MFA est sans objet : la credential est unique.
 **Pourquoi :** personne ne surveille un pipeline comme on surveille une personne — la protection ne peut pas reposer sur un facteur humain.
+
+</details>
 
 ---
 

@@ -190,25 +190,21 @@ la journée.*
 
 ## 🧠 Vérifiez vos acquis
 
-*Formatif, jamais noté. Répondez sans relire le chapitre, puis cochez. Les réponses sont juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
+*Formatif, jamais noté. Répondez sans relire le chapitre. Les réponses se déplient juste après le séparateur : ce qui compte est de repérer où vous vacillez, pas de faire 5 sur 5.*
 
 **1.** Un collègue veut écrire l'adresse postale de l'utilisateur dans la charge utile « de toute façon c'est encodé en base64, donc personne ne le lit ». Que lui répondez-vous ?
 
-- A. Il a raison : base64url est une forme de chiffrement
+- A. Il a raison : base64url est une forme de chiffrement, sans la clé personne ne relit la charge utile
 - B. Il a tort : base64url est un encodage, la charge utile est lisible par tous
-- C. Il a raison si la clé de signature est assez longue
-- D. Il a tort : l'adresse doit aller dans l'en-tête à la place
-
-- [ ] ✓ je savais
+- C. Il a raison si la clé de signature est assez longue : la charge utile devient illisible sans elle
+- D. Il a tort : l'adresse doit aller dans l'en-tête à la place, que seul le serveur est censé lire
 
 **2.** Votre API accepte un jeton dont l'en-tête annonce `{"alg":"none"}` et laisse son auteur choisir son propre rôle. Quelle règle a été violée ?
 
-- A. La clé de signature était trop courte
+- A. La clé de signature était trop courte : une clé robuste aurait rendu la fabrication impossible
 - B. L'algorithme attendu se décide côté serveur, en liste blanche, jamais dans le jeton
-- C. Le jeton voyageait dans une URL
-- D. Le jeton ne portait pas de déclaration `aud`
-
-- [ ] ✓ je savais
+- C. Le jeton voyageait dans une URL, où un tiers a pu le lire puis modifier le rôle avant l'appel
+- D. Le jeton ne portait pas de déclaration `aud` : n'importe quel destinataire pouvait donc l'utiliser
 
 **3.** Votre API accepte un jeton parfaitement signé, non expiré, émis par un service partenaire — et il ouvre des données qui ne lui étaient pas destinées. Quelle déclaration n'a pas été contrôlée ?
 
@@ -217,22 +213,20 @@ la journée.*
 - C. `aud`
 - D. `scope`
 
-- [ ] ✓ je savais
-
 **4.** Votre front web range le jeton d'accès dans `localStorage`. Quel risque, et quelle alternative le chapitre met en face ?
 
 - A. Risque : le jeton est renvoyé à chaque requête — alternative : le mettre dans le corps des requêtes POST (celles qui envoient des données)
 - B. Risque : n'importe quel script injecté le lit — alternative : un cookie `HttpOnly`
 - C. Risque : il expire plus vite dans `localStorage` — alternative : une variable de session
-- D. Aucun risque dès lors que le site est en HTTPS
-
-- [ ] ✓ je savais
+- D. Aucun risque dès lors que le site est en HTTPS : le stockage local du navigateur est hors d'atteinte
 
 **5.** *Question ouverte (2-3 lignes).* Écrivez la liste des contrôles que votre API applique à un JWT reçu, dans l'ordre, et dites ce que chacun attrape.
 
-- [ ] ✓ je savais
-
 ---
+
+<details>
+
+<summary>Vérifier ses réponses</summary>
 
 ### Réponses
 
@@ -250,6 +244,8 @@ la journée.*
 
 **5.** Attendu : signature valide avec algorithme en liste blanche (jeton fabriqué à la main) ; `exp` et `nbf` (jeton hors période, donc volé et exploitable indéfiniment) ; `iss` et `aud` (jeton d'un autre service ou d'un autre destinataire) ; périmètre ou rôle (confusion authentification / autorisation) ; révocation (jeton compromis), compensée par des durées courtes avec jeton de rafraîchissement ou par une liste noire.
 **Pourquoi :** un JWT n'est pas sécurisé par nature — il l'est si et seulement si ces contrôles sont faits et la clé reste secrète.
+
+</details>
 
 ---
 

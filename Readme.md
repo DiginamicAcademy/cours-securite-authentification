@@ -50,16 +50,16 @@ Vous serez capable de :
 
 **Travaux pratiques**
 
-Niveaux : 🟢 Débutant · 🟡 Intermédiaire · 🔵 Intégration · 🔴 Défi (facultatif).
+Niveaux : 🟢 Débutant · 🟡 Intermédiaire · 🔵 Intégration · 🔴 Défi (facultatif). Les exercices sont intégrés aux chapitres, chacun placé juste après la notion qu'il applique.
 
 | | Sujet | Durée |
 | --- | --- | --- |
-| 🟢 | [Exercice — Diagnostiquer l'authentification d'une application](tp/01-diagnostiquer-auth.md) · [corrigé](tp/corrige/01-diagnostiquer-auth.md) | 25 min |
-| 🟡 | [Exercice — Sécuriser la session d'une application](tp/02-securiser-session.md) · [corrigé](tp/corrige/02-securiser-session.md) | 45 min |
-| 🔵 | [Exercice — Concevoir l'authentification d'une API de données](tp/03-concevoir-auth-api.md) · [corrigé](tp/corrige/03-concevoir-auth-api.md) | 55 min |
-| 🔴 | [Exercice — Proposer une politique MFA accessible et conforme](tp/04-defi-mfa.md) · [corrigé](tp/corrige/04-defi-mfa.md) | ≈ 30 min |
+| 🟢 | Diagnostiquer l'authentification d'une application — dans le chapitre 01 | 25 min |
+| 🟡 | Sécuriser la session d'une application — dans le chapitre 03 | 45 min |
+| 🔵 | Concevoir l'authentification d'une API de données — dans le chapitre 05 | 55 min |
+| 🔴 | Proposer une politique MFA accessible et conforme — dans le chapitre 06 | ≈ 30 min |
 
-> Le PDF de ce cours assemble les chapitres et le glossaire ; les exercices et leurs corrigés (`tp/`) se lisent dans le dépôt.
+> Le PDF de ce cours assemble les chapitres et le glossaire : les exercices et leur correction (à déplier) en font partie.
 
 ---
 
@@ -71,7 +71,7 @@ revenir au concept concerné, refaire l'exercice.
 ### Chapitres 01 à 06
 
 - [ ] J'ai lu les chapitres 01 à 06 et les points clés sont clairs.
-- [ ] J'ai fait au moins les exercices 🟢 et 🟡 (partie principale), et vérifié mes réponses dans `tp/corrige/`. Les extensions « Pour aller plus loin » sont facultatives.
+- [ ] J'ai fait au moins les exercices 🟢 et 🟡 (partie principale), et vérifié mes réponses dans le chapitre concerné, bloc « Voir la correction ». Les extensions « Pour aller plus loin » sont facultatives.
 - [ ] J'ai fait les auto-évaluations « Vérifiez vos acquis » de fin de chapitre (formatives, jamais notées) et repris les questions manquées.
 - [ ] Je sais expliquer, avec mes mots, les 2-3 idées principales du cours.
 - [ ] Je peux appliquer ces idées à un cas simple (un extrait de code, une config, un flux).
