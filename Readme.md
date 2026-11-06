@@ -40,6 +40,7 @@ Vous serez capable de :
 | 04 | [JWT et tokens — la lettre signée](04-jwt-et-tokens.md) | 20 min |
 | 05 | [OAuth2 et OpenID Connect — donner un accès limité](05-oauth2-oidc.md) | 17 min |
 | 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 19 min |
+| A | [Glossaire et ressources](A-Glossaire-et-ressources.md) | annexe, à consulter |
 
 **Travaux pratiques**
 
