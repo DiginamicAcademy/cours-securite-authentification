@@ -123,6 +123,26 @@ La commodité des JWT a popularisé quelques erreurs, toutes spectaculaires.
   Locator), il se retrouve dans les journaux du serveur, l'historique du
   navigateur et les en-têtes `Referer`.
 
+La carte ci-dessous apparie chaque erreur à sa parade :
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+mindmap
+  root((JWT — ce qui casse))
+    alg none accepté
+      Liste blanche côté serveur
+    Décodage sans signature
+      Vérifier la signature
+    Clé faible ou par défaut
+      Clé longue tirée au sort et gardée au coffre
+    Durée excessive sans révocation
+      Durées courtes et rafraîchissement
+    Stockage dans localStorage
+      Cookie HttpOnly
+    Jeton dans l'adresse
+      En-tête Authorization
+```
+
 > ⛔ **Piège de sécurité**
 > Un JWT n'est pas « sécurisé par nature ». Il est sécurisé **si et seulement si**
 > le serveur vérifie la signature, l'algorithme, l'expiration et le destinataire —
@@ -141,6 +161,24 @@ La vérification côté serveur tient en une liste courte, à appliquer dans l'o
 | `iss` (émetteur) et `aud` (destinataire) | le jeton est bien pour moi | jeton d'un autre service accepté ici |
 | Périmètre ou rôle (`scope`) | l'identité a le droit demandé | confusion authentification / autorisation |
 | Révocation | le jeton n'a pas été invalidé | un jeton compromis reste bon |
+
+Le tableau ci-dessus donne le pourquoi de chaque contrôle ; le schéma ci-dessous y ajoute l'ordre et l'arrêt sur échec :
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+flowchart TD
+    T["Jeton reçu"] --> C1{"Signature valide et algorithme en liste blanche ?"}
+    C1 -->|non — jeton fabriqué à la main| X["Refuser"]
+    C1 -->|oui| C2{"exp et nbf dans la période ?"}
+    C2 -->|non — jeton volé exploitable sans fin| X
+    C2 -->|oui| C3{"iss et aud me concernent ?"}
+    C3 -->|non — jeton d'un autre service| X
+    C3 -->|oui| C4{"scope couvre l'appel ?"}
+    C4 -->|non — confusion authentification et autorisation| X
+    C4 -->|oui| C5{"Jeton révoqué ?"}
+    C5 -->|oui — jeton compromis| X
+    C5 -->|non| OK["Accepter la requête"]
+```
 
 Sur la révocation, deux écoles :
 
