@@ -58,20 +58,25 @@ qui a droit à quoi, l'API se contente de vérifier le jeton.
 
 ### Le déroulement
 
-```text
- navigateur            client (tableau de bord)     serveur d'autorisation      API
-     │  1. « afficher mes ventes » │                       │                      │
-     │────────────────────────────►│  2. redirection vers la demande de droits   │
-     │◄────────────────────────────│──────────────────────►│                      │
-     │  3. consentement : « lire les ventes »              │                      │
-     │────────────────────────────►│  4. code d'autorisation│                     │
-     │                             │◄──────────────────────│                      │
-     │                             │  5. code + preuve du client                 │
-     │                             │──────────────────────►│                      │
-     │                             │  6. jeton d'accès (+ jeton de rafraîchissement)
-     │                             │◄──────────────────────│                      │
-     │                             │  7. appel API avec le jeton                 │
-     │                             │─────────────────────────────────────────────►│
+Le déroulement ci-dessous garde les sept étapes du flow, et l'ordre des flèches y dit ce qui change de canal : les étapes 1 à 4 passent par le navigateur, les étapes 5 et 6 sont un échange direct entre le client et le serveur d'autorisation.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    autonumber
+    participant U as Propriétaire (navigateur)
+    participant C as Client (tableau de bord)
+    participant A as Serveur d'autorisation
+    participant R as API
+    U->>C: « afficher mes ventes »
+    C-->>U: redirection vers la demande de droits
+    U->>A: consentement « lire les ventes »
+    A-->>C: code d'autorisation
+    Note over U,A: Étapes 1 à 4 — tout passe par le navigateur
+    C->>A: code + preuve du client (secret, ou PKCE)
+    A->>C: jeton d'accès et jeton de rafraîchissement
+    Note over C,A: Étapes 5 et 6 — en direct, hors navigateur
+    C->>R: appel de l'API avec le jeton
 ```
 
 L'idée centrale : le **code** d'autorisation transite par le navigateur, mais le
