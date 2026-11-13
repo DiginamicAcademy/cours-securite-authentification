@@ -39,6 +39,19 @@ l'utilisateur après la connexion et présentée à chaque requête. C'est le ba
 musée — il prouve que vous êtes entré par la caisse, pas que vous pouvez ouvrir
 les réserves.
 
+Le schéma ci-dessous montre l'ordre des deux portes et, surtout, les deux issues d'échec distinctes :
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+flowchart LR
+    R["Requête"] --> N{"AuthN — qui êtes-vous ?"}
+    N -->|échec| E1["401 — échec d'authentification"]
+    N -->|succès| S["Session — le badge"]
+    S --> Z{"AuthZ — avez-vous le droit ?"}
+    Z -->|non| E2["403 — échec d'autorisation"]
+    Z -->|oui| D["Ressource"]
+```
+
 ### La fromagerie, deux portes
 
 Chez DIGICHEESE, la boutique en ligne et la console d'administration sont deux
@@ -111,6 +124,25 @@ clairement que dans l'extrait de code ci-dessus. Les formes les plus fréquentes
 Ces erreurs ont un point commun : le contrôle qui manque porte sur les **droits**,
 pas sur l'identité. La question à se poser, ligne après ligne : *ce que je viens
 de vérifier, est-ce « qui c'est » ou « ce qu'il peut faire » ?*
+
+Le schéma ci-dessous joue note à note la requête `/commandes/43` : le contrôle de session passe, puis la lecture en base a lieu sans contrôle d'appartenance. La branche en pointillés est celle qui manque.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    participant N as Navigateur — revendeur connecté
+    participant S as Serveur
+    participant B as Base de données
+    N->>S: GET /commandes/43 avec un cookie de session valide
+    S->>S: cookie valide — l'identité est établie
+    S->>B: SELECT ... WHERE id = 43 — aucun contrôle d'appartenance
+    B-->>S: la commande d'un autre revendeur
+    S-->>N: la commande d'autrui s'affiche
+    Note over S: Corrigé — le contrôle qui manque
+    S-->>B: la commande 43 appartient-elle au compte connecté ?
+    B-->>S: non
+    S-->>N: 403 — refus
+```
 
 ---
 
