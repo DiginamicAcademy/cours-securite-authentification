@@ -101,6 +101,27 @@ propriété que les mots de passe n'ont pas — la passkey est **liée au site**
 faux site d'hameçonnage ne reçoit rien : l'appareil refuse de signer pour un
 domaine qui n'est pas celui enregistré.
 
+Le schéma ci-dessous joue l'échange qui produit cette propriété — un défi qui porte le domaine — avec sa branche refusée :
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    participant U as Utilisateur
+    participant D as Appareil — clé privée
+    participant S as Service — clé publique
+    S->>D: défi portant le domaine du service
+    D->>U: déverrouillage local — empreinte ou code
+    U-->>D: appareil déverrouillé
+    alt Le domaine est celui enregistré
+        D->>S: signature du défi
+        S->>S: vérification avec la clé publique
+        S-->>U: accès accordé
+    else Faux site d'hameçonnage
+        D->>D: le domaine ne correspond pas
+        D--xS: refus de signer — le faux site ne reçoit rien
+    end
+```
+
 | | Mot de passe | Passkey |
 | --- | --- | --- |
 | Secret partagé avec le serveur | oui | non (clé publique seulement) |
