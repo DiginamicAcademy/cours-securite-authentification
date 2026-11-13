@@ -46,7 +46,7 @@ Vous serez capable de :
 | 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 19 min |
 | A | [Glossaire et ressources](A-Glossaire-et-ressources.md) | annexe, à consulter |
 
-> Les ateliers des chapitres 02 et 03 s'exécutent dans le **lab partagé** du parcours ([DiginamicAcademy/lab-digicheese](https://github.com/DiginamicAcademy/lab-digicheese)) : clonez le dépôt, puis `cd lab-digicheese && docker compose up --build -d` (Docker requis).
+> Les ateliers des chapitres 02 et 03 s'exécutent dans le **lab partagé** du parcours ([DiginamicAcademy/lab-securite](https://github.com/DiginamicAcademy/lab-securite)) : clonez le dépôt, puis `cd lab-securite && docker compose up --build -d` (Docker requis).
 
 **Travaux pratiques**
 

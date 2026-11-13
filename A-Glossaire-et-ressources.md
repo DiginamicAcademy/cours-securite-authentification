@@ -140,7 +140,7 @@ journée.
 ## Dans ce cours
 
 - Les quatre exercices de la journée : intégrés aux chapitres 01, 03, 05 et 06, chacun suivi de sa correction à déplier.
-- Le lab des ateliers des chapitres 02 et 03 : `cd lab-digicheese && docker compose up --build -d`, comme indiqué dans les chapitres — le service `db` pour les stockages de mots de passe, le service `secure` pour le jeton et la session. Le lab est dans le dépôt [DiginamicAcademy/lab-digicheese](https://github.com/DiginamicAcademy/lab-digicheese), clonez-le.
+- Le lab des ateliers des chapitres 02 et 03 : `cd lab-securite && docker compose up --build -d`, comme indiqué dans les chapitres — le service `db` pour les stockages de mots de passe, le service `secure` pour le jeton et la session. Le lab est dans le dépôt [DiginamicAcademy/lab-securite](https://github.com/DiginamicAcademy/lab-securite), clonez-le.
 
 ---
 
