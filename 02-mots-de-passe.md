@@ -151,6 +151,20 @@ rien. On garde une colonne de « version de hachage » pour savoir où en est 
 compte, et on force la réinitialisation des empreintes les plus faibles (clair,
 MD5) après un délai annoncé.
 
+Le schéma ci-dessous montre pourquoi la bascule n'est possible que sur une vérification réussie : on ne peut pas re-hacher ce qu'on ne peut pas relire.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+flowchart TD
+    A["Demande de connexion"] --> B["Vérification avec l'algorithme annoncé par la colonne version"]
+    B --> C{"Succès ?"}
+    C -->|non| R["Refus"]
+    C -->|oui| D{"Version faible — clair ou MD5 ?"}
+    D -->|oui| E["Re-hachage bcrypt ou argon2 — et réinitialisation forcée au-delà du délai annoncé"]
+    E --> F["Session ouverte"]
+    D -->|non| F
+```
+
 ---
 
 ## III. Politique et NIST 800-63B
