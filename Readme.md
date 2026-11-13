@@ -16,7 +16,7 @@
 
 « Qui êtes-vous ? » est la première question de toute sécurité, et « avez-vous le droit ? » vient juste après. Les confondre est la faille la plus fréquente du web : un client connecté qui ouvre la console d'administration, une commande qui se lit en changeant un numéro dans l'adresse, un mot de passe stocké en clair dans la base.
 
-Ce cours suit le fil rouge de **DIGICHEESE** (la fromagerie du fil rouge) : sa boutique en ligne, son extranet revendeurs et sa console d'administration servent de terrain d'observation. On y sépare **AuthN** (authentification), **AuthZ** (autorisation) et session, on classe les preuves d'identité, puis on diagnostique les failles d'une application réelle.
+Ce cours suit **DIGICHEESE** (l'entreprise d'étude du parcours) : sa boutique en ligne, son extranet revendeurs et sa console d'administration servent de terrain d'observation. On y sépare **AuthN** (authentification), **AuthZ** (autorisation) et session, on classe les preuves d'identité, puis on diagnostique les failles d'une application réelle.
 
 Ces réflexes servent au-delà du web : une **API** (interface de programmation) de données, un pipeline d'automatisation ou un compte de service posent les mêmes questions d'identité et de droits.
 
@@ -46,7 +46,7 @@ Vous serez capable de :
 | 06 | [MFA et identité data — humains et machines](06-mfa-et-identite-data.md) | 19 min |
 | A | [Glossaire et ressources](A-Glossaire-et-ressources.md) | annexe, à consulter |
 
-> Les ateliers des chapitres 02 et 03 s'exécutent dans le **lab partagé** du parcours : le dossier `lab/` est fourni par votre formateur (il n'est pas dans ce dépôt). Placez-le à la racine du cours, puis `cd lab && docker compose up --build -d` (Docker requis).
+> Les ateliers des chapitres 02 et 03 s'exécutent dans le **lab partagé** du parcours ([DiginamicAcademy/lab-digicheese](https://github.com/DiginamicAcademy/lab-digicheese)) : clonez le dépôt, puis `cd lab-digicheese && docker compose up --build -d` (Docker requis).
 
 **Travaux pratiques**
 

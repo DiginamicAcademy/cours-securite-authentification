@@ -60,7 +60,7 @@ table, et l'empreinte redevient un mot de passe.
 > 🧪 **Atelier rapide (8 min)**
 >
 > La base de démonstration du lab contient des stockages de toutes les époques.
-> Lab démarré (`cd lab && docker compose up --build -d`), listez les secrets
+> Lab démarré (`cd lab-digicheese && docker compose up --build -d`), listez les secrets
 > stockés :
 
 ```bash

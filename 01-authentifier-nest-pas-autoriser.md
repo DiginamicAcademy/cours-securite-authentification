@@ -2,7 +2,7 @@
 
 # Authentifier n'est pas autoriser — AuthN, AuthZ et vecteurs d'identité
 
-> Un client de **DIGICHEESE** (la fromagerie du fil rouge) se connecte à son compte
+> Un client de **DIGICHEESE** (l'entreprise d'étude du parcours) se connecte à son compte
 > et découvre la liste de toutes les commandes de la boutique. Il était bien authentifié — mais
 > avait-il le droit de voir ça ? Deux questions différentes, deux portes
 > différentes : les confondre est la faille la plus fréquente du web.
@@ -118,7 +118,7 @@ de vérifier, est-ce « qui c'est » ou « ce qu'il peut faire » ?*
 
 #### Contexte
 
-**DIGICHEESE** (la fromagerie du fil rouge) ouvre un extranet
+**DIGICHEESE** (l'entreprise d'étude du parcours) ouvre un extranet
 à ses revendeurs (épiceries, restaurants) et une console d'administration à son
 équipe. L'agence qui a livré
 l'application vous fait une démonstration. Voici ce que vous observez :
