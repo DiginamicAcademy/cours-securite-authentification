@@ -34,6 +34,27 @@
 navigateur un identifiant. À chaque requête suivante, le navigateur renvoie cet
 identifiant : le serveur retrouve la session et n'a plus besoin du mot de passe.
 
+Le schéma ci-dessous enchaîne le cycle de vie complet du badge — émission, transport, mort :
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    participant N as Navigateur
+    participant S as Serveur et son stockage de sessions
+    N->>S: POST /login avec les identifiants
+    Note over S: Émission — l'identifiant doit être tiré au sort
+    S->>S: crée l'entrée de session
+    S-->>N: Set-Cookie avec les trois drapeaux
+    Note over N,S: Transport — sans HTTPS le jeton se capte sur le réseau
+    N->>S: requête suivante avec le cookie
+    S->>S: retrouve la session — le mot de passe n'est plus nécessaire
+    S-->>N: la ressource demandée
+    N->>S: Se déconnecter
+    S->>S: supprime l'entrée de session côté serveur
+    Note over S: Mort — invalider d'abord, puis effacer le cookie
+    S-->>N: cookie effacé
+```
+
 Deux modèles coexistent :
 
 | Modèle | Où vivent les données de session | Avantage | Limite |
@@ -96,6 +117,39 @@ La défense tient en un geste : **régénérer l'identifiant de session à la
 connexion** (et à chaque changement de privilège). L'identifiant attribué avant
 la connexion ne doit jamais survivre à celle-ci.
 
+Les deux attaques se distinguent par un seul fait : qui crée l'identifiant. Les deux séquences ci-dessous jouent les mêmes acteurs, en miroir.
+
+**Détournement — le serveur crée l'identifiant, l'attaquant le lit :**
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    participant V as Victime
+    participant A as Attaquant
+    participant S as Serveur
+    S-->>V: J1 — identifiant émis par le serveur
+    Note over V: Un script injecté, un réseau en clair ou un poste partagé le lit
+    A->>S: requête avec J1
+    S-->>A: « c'est vous » — la session était déjà ouverte
+    Note over A,S: L'identifiant vient du serveur — il est volé
+```
+
+**Fixation — l'attaquant crée l'identifiant, le serveur le conserve :**
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+sequenceDiagram
+    participant V as Victime
+    participant A as Attaquant
+    participant S as Serveur
+    A->>V: lien piégé portant J0 — choisi par l'attaquant
+    V->>S: connexion avec J0
+    S->>S: conserve J0 après la connexion
+    A->>S: requête avec J0
+    S-->>A: « c'est vous » — l'identifiant n'a pas été régénéré
+    Note over A,S: L'identifiant vient de l'attaquant — il est conservé
+```
+
 > ⛔ **Piège de sécurité**
 > Un identifiant de session calculé de façon prévisible — le MD5 du nom
 > d'utilisateur, par exemple — cumule les deux problèmes : il se devine, et il ne
@@ -130,6 +184,24 @@ Une session ouverte indéfiniment est un passif. Deux durées se combinent :
   session se ferme — c'est la protection contre un poste oublié ouvert ;
 - l'**expiration absolue** : au-delà d'une durée maximale, la session se termine
   même si elle est active — un jeton volé ne reste pas exploitable des semaines.
+
+Les deux horloges ci-dessous partent de la connexion, graduées en heures : la première ne repart jamais, la seconde repart à chaque requête.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#eef2f9','primaryBorderColor':'#3b5b8d','primaryTextColor':'#1f3f6b','lineColor':'#3b5b8d','secondaryColor':'#dbe6f5','tertiaryColor':'#fde8e8','fontFamily':'DejaVu Sans'}}}%%
+gantt
+    title Les deux horloges d'une même session
+    dateFormat HH:mm
+    axisFormat %H:%M
+    section Absolue
+    8 h d'âge maximum — une seule barre continue : 00:00, 08:00
+    Session toujours active — fermée par l'absolue : crit, 08:00, 08:30
+    section Inactivité
+    Requête — l'horloge repart : 00:00, 01:00
+    Nouvelle requête — l'horloge repart : 01:00, 02:00
+    Encore une requête — l'horloge repart : 02:00, 03:00
+    Plus de requête — la fenêtre de 1 h s'écoule : crit, 03:00, 04:00
+```
 
 Le lab fixe une seule limite, d'une heure à compter de l'émission du jeton —
 une limite absolue, qui court même si la session reste active. Une application
